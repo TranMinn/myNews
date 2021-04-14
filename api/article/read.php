@@ -21,6 +21,7 @@ $result = $article->read();
 $num = $result->rowCount();
 
 // Check if any articles
+// Retrieve data from table
 if($num > 0) {
   $articles_arr = array();
 
@@ -41,23 +42,25 @@ if($num > 0) {
 
     // Push data
     array_push($articles_arr, $article_item);
+
   }
 
-  // Turn to JSON & output
+  // set response code - 200 OK
+  http_response_code(200);
+
+  // Show data in JSON format
   echo json_encode($articles_arr);
 
 } else {
-  // No Posts
+
+  // set response code - 404 Not found
+  http_response_code(404);
+
+  // No Article
   echo json_encode(
     array('message' => 'No Article Found')
   );
 }
-
-
-
-
-
-
 
 
 ?>

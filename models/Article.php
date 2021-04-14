@@ -3,7 +3,7 @@
 class Article{
     // DB table names
     private $conn;
-    private $table_name = "article";
+    private $table = "article";
 
     // Article properties
     public $id;
@@ -67,10 +67,10 @@ class Article{
 
         // Set Properties
         $this->title = $row['title'];
-        $this->title = $row['intro'];
-        $this->body = $row['content'];
+        $this->intro = $row['intro'];
+        $this->content = $row['content'];
         $this->author = $row['author'];
-        $this->category_id = $row['cate_id'];
+        $this->cate_id = $row['cate_id'];
         $this->category_name = $row['category_name'];
         $this->tag_id = $row['tag_id'];
         $this->tag_name = $row['tag_name'];
