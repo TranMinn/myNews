@@ -51,8 +51,8 @@ class Category{
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set Properties
-        $this->title = $row['id'];
-        $this->title = $row['name'];
+        $this->id = $row['id'];
+        $this->name = $row['name'];
 
         
     // CREATE ARTICLE
@@ -63,31 +63,6 @@ class Category{
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
 
 ?>

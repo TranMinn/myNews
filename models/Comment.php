@@ -1,0 +1,167 @@
+<?php
+
+class Comment{
+    // DB table names
+    private $conn;
+    private $table = "comment";
+
+    // Category properties
+    public $id;
+    public $article_id;
+    public $content;
+    public $date_created;
+
+    // Construct with DB
+    public function __construct($db){
+        $this->conn = $db;
+    }
+
+    // GET COMMENTS
+    public function read(){
+        // Query
+        $query = 'SELECT a.title as title, cm.id, cm.article_id, cm.content, cm.date_created
+                                FROM ' . $this->table . ' cm
+                                LEFT JOIN
+                                  article a ON cm.article_id = a.id
+                                ORDER BY
+                                  cm.date_created DESC';
+
+        // Prepared Statement
+        $stmt = $this->conn->prepare($query);
+
+        // Execute Query
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    // GET ONE COMMENT
+    public function read_one(){
+        // Query
+        $query = 'SELECT a.title as title, cm.id, cm.article_id, cm.content, cm.date_created
+                                FROM ' . $this->table . ' cm
+                                LEFT JOIN
+                                  article a ON cm.article_id = a.id
+                                WHERE
+                                  cm.id = ?
+                                LIMIT 0,1';
+
+        // Prepared Statement
+        $stmt = $this->conn->prepare($query);
+
+        // Bind ID
+        $stmt->bindParam(1, $this->id);
+
+        // Execute Query
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Set Properties
+        $this->id = $row['id'];
+        $this->content = $row['content'];
+        $this->article_id = $row['article_id'];
+        $this->title = $row['title'];
+
+    }
+
+        
+    // CREATE COMMENT
+    public function create(){
+        // Query
+        $query = 'INSERT INTO ' . $this->table . ' 
+                    SET 
+                    article_id = :article_id, username = :username, 
+                    content = :content';
+
+        // Prepared Statement
+        $stmt = $this->conn->prepare($query);
+
+        // Clean Data
+        $this->article_id = htmlspecialchars(strip_tags($this->article_id));
+        $this->username = htmlspecialchars(strip_tags($this->username));
+        $this->content = htmlspecialchars(strip_tags($this->content));
+
+        // Bind Data
+        $stmt->bindParam(':article_id', $this->article_id);
+        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':content', $this->content);
+
+        // Execute Query
+        if($stmt->execute()) {
+            return true;
+        }
+
+        // Print Error if something goes wrong
+        printf("Error: %s.\n", $stmt->error);
+
+        return false;
+
+    }
+
+    // UPDATE COMMENT
+    public function update(){
+        // Query
+        $query = 'UPDATE ' . $this->table . ' 
+                    SET 
+                    article_id = :article_id, username = :username, 
+                    content = :content
+                    WHERE
+                    id = :id';
+
+        // Prepared Statement
+        $stmt = $this->conn->prepare($query);
+
+        // Clean Data
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $this->article_id = htmlspecialchars(strip_tags($this->article_id));
+        $this->username = htmlspecialchars(strip_tags($this->username));
+        $this->content = htmlspecialchars(strip_tags($this->content));
+       
+        // Bind Data
+        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':article_id', $this->article_id);
+        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':content', $this->content);
+
+        // Execute Query
+        if($stmt->execute()) {
+            return true;
+          }
+
+          // Print Error if something goes wrong
+          printf("Error: %s.\n", $stmt->error);
+
+          return false;
+
+
+    }
+
+    // DELETE COMMENT
+    public function delete(){
+        // Query
+        $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
+
+        // Prepared Statement
+        $stmt = $this->conn->prepare($query);
+
+        // Clean Data
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        // Bind Data
+        $stmt->bindParam(':id', $this->id);
+
+        // Execute Query
+        if($stmt->execute()) {
+            return true;
+          }
+
+          // Print Error if something goes wrong
+          printf("Error: %s.\n", $stmt->error);
+
+          return false;
+    }
+
+}
+
+?>

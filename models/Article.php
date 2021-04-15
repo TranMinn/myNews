@@ -77,16 +77,46 @@ class Article{
 
     }
 
+    // SEARCH ARTICLE
+    public function search($keywords){
+      // Query
+      $query = 'SELECT c.name as category_name, t.name as tag_name, a.id, a.cate_id, a.tag_id, a.title, a.intro, a.content, a.author, a.date_created
+      FROM ' . $this->table . ' a
+      LEFT JOIN
+        category c ON a.cate_id = c.id
+      LEFT JOIN
+        tag t ON a.tag_id = t.id
+      WHERE
+        a.title LIKE ? OR c.name LIKE ? OR t.name LIKE ?
+      ORDER BY
+        a.date_created DESC';
+
+      // Prepared Statement
+      $stmt = $this->conn->prepare($query);
+
+      // Keyword
+      $keywords = htmlspecialchars(strip_tags($keywords));
+      $keywords = "%{$keywords}%";
+
+      // Bind
+      $stmt->bindParam(1, $keywords);
+      $stmt->bindParam(2, $keywords);
+      $stmt->bindParam(3, $keywords);
+
+      // Execute Query
+      $stmt->execute();
+
+      return $stmt;
+
+    }
+
+
     // CREATE ARTICLE
 
     // UPDATE ARTICLE
 
     // DELETE ARTICLE
     
-
-
-
-
 
 }
 
