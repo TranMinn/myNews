@@ -46,7 +46,7 @@ if($num > 0) {
   http_response_code(200);
 
   // Show data in JSON format
-  echo json_encode($comments_arr);
+  echo json_encode(['status' => 200, 'data' => $comments_arr]);
 
 } else {
 
@@ -55,7 +55,7 @@ if($num > 0) {
 
   // No Article
   echo json_encode(
-    array('message' => 'No Comment Found')
+    ['status' => 404, 'data' => 'No Comment found']
   );
 }
 

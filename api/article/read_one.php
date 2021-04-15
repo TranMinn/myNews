@@ -33,6 +33,7 @@
       );
 
     // JSON
-    print_r(json_encode($article_arr));
+    // print_r(json_encode($article_arr));
+    echo json_encode(['status' => 200, 'data' => $article_arr]);
 
 ?>

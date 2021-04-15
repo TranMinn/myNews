@@ -49,7 +49,7 @@ if($num > 0) {
   http_response_code(200);
 
   // Show data in JSON format
-  echo json_encode($articles_arr);
+  echo json_encode(['status' => 200, 'data' => $articles_arr]);
 
 } else {
 
@@ -58,7 +58,7 @@ if($num > 0) {
 
   // No Article
   echo json_encode(
-    array('message' => 'No Article Found')
+    ['status' => 404, 'data' => 'No Article found']
   );
 }
 

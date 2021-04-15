@@ -29,6 +29,7 @@
       );
 
     // JSON
-    print_r(json_encode($comment_arr));
+    // print_r(json_encode($comment_arr));
+    echo json_encode(['status' => 200, 'data' => $comment_arr]);
 
 ?>
