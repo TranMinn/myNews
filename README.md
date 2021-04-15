@@ -1,1 +1,1 @@
-# My-News
+# My-News - IWS Final Project
