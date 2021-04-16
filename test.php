@@ -29,28 +29,20 @@ if(isset($response['status'])){
 
         ?>
         
-        <table>
-            <tr>
-                <td>ID</td>
-                <td>Title</td>
-                <td>Image</td>
-                <td>Author</td>
-            </tr>
 
             <?php
-              foreach($response['data'] as $list){
-                  echo "<tr>
-                    <td>".$list['id']."</td>
-                    <td>".$list['title']."</td>
-                    <td>".$list['image']."</td>
-                    <td>".$list['author']."</td>
-                    
-                  </tr>";
-              }  
-            
-            ?>
+              foreach($response['data'] as $list){?>
 
-        </table>
+        <div>
+            <img src="articleImages/<?php echo htmlentities($list['image']);?>" alt="<?php echo htmlentities($list['title']);?>">
+            <div>
+              <h2><?php echo htmlentities($list['title']);?></h2>
+                 <p><b>Author : </b><?php echo htmlentities($list['author']);?></a> </p>
+       
+              <a href="">Read More &rarr;</a>
+            </div>
+
+             <?php } ?> 
 
         <?php
 
