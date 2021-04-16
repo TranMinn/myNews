@@ -55,6 +55,8 @@ class Category{
         $this->name = $row['name'];
 
         
+    // TO-DO:
+        
     // CREATE ARTICLE
 
     // UPDATE ARTICLE

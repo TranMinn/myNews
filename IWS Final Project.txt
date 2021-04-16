@@ -30,8 +30,7 @@ Pages:
 ==================================================
 
 TO_DO API:
-- GET article by name/ category/ tag
-- GET related articles (same category but different id)
+- GET related articles (get all articles -> same category but different id)
 - Full read, read_one, update, delete
 
 ==================================================
