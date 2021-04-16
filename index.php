@@ -31,9 +31,20 @@
 
     <!-- Page Content -->
 
-    <!-- Blog Post -->
+    <main>
 
+    <!-- Trending Area -->
 
+    <!--  Weekly-News -->
+
+    <!-- Category -->
+
+    <!-- Slides -->
+
+    <!-- Youtube -->
+
+    
+    </main>
 
 
 

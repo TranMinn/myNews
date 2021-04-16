@@ -24,28 +24,36 @@ $response = json_decode($response, true);
 
 if(isset($response['status'])){
     if($response['status'] == '200'){
-        // echo '<pre>';
-        // print_r($response['data']);
+        echo '<pre>';
+
+        $data = $response['data'];
+
+        // echo count($data);
+        $result = $response['data'][0];
+        $result1 = $response['data'][1];
+
+        // print_r($result);
 
         ?>
-        
 
-            <?php
-              foreach($response['data'] as $list){?>
+        <!-- Control with variable i -->
 
-        <div>
-            <img src="articleImages/<?php echo htmlentities($list['image']);?>" alt="<?php echo htmlentities($list['title']);?>">
+        <?php
+        for($i = 0; $i < count($data); $i++){
+            ?> 
+
             <div>
-              <h2><?php echo htmlentities($list['title']);?></h2>
-                 <p><b>Author : </b><?php echo htmlentities($list['author']);?></a> </p>
+            <img src="articleImages/<?php echo htmlentities($data[$i]['image']);?>" alt="<?php echo htmlentities($data[$i]['title']);?>">
+            <div>
+              <h2><?php echo htmlentities($data[$i]['title']);?></h2>
+                 <p><b>Author : </b><?php echo htmlentities($data[$i]['author']);?></a> </p>
        
               <a href="">Read More &rarr;</a>
             </div>
 
-             <?php } ?> 
+        <?php } ?>
 
-        <?php
-
+<?php
     }else{
         echo $response['data'];
     }
