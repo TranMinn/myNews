@@ -11,6 +11,7 @@ class Article{
     public $tag_id;
     public $title;
     public $intro;
+    public $image;
     public $content;
     public $author;
     public $date_created;
@@ -23,7 +24,7 @@ class Article{
     // GET ARTICLES
     public function read(){
         // Query
-        $query = 'SELECT c.name as category_name, t.name as tag_name, a.id, a.cate_id, a.tag_id, a.title, a.intro, a.content, a.author, a.date_created
+        $query = 'SELECT c.name as category_name, t.name as tag_name, a.id, a.cate_id, a.tag_id, a.title, a.intro, a.image, a.content, a.author, a.date_created
                                 FROM ' . $this->table . ' a
                                 LEFT JOIN
                                   category c ON a.cate_id = c.id
@@ -44,7 +45,7 @@ class Article{
     // GET ONE ARTICLE
     public function read_one(){
         // Query
-        $query = 'SELECT c.name as category_name, t.name as tag_name, a.id, a.cate_id, a.tag_id, a.title, a.intro, a.content, a.author, a.date_created
+        $query = 'SELECT c.name as category_name, t.name as tag_name, a.id, a.cate_id, a.tag_id, a.title, a.intro, a.image, a.content, a.author, a.date_created
                                 FROM ' . $this->table . ' a
                                 LEFT JOIN
                                 category c ON a.cate_id = c.id
@@ -68,6 +69,7 @@ class Article{
         // Set Properties
         $this->title = $row['title'];
         $this->intro = $row['intro'];
+        $this->image = $row['image'];
         $this->content = $row['content'];
         $this->author = $row['author'];
         $this->cate_id = $row['cate_id'];
@@ -80,7 +82,7 @@ class Article{
     // SEARCH ARTICLE
     public function search($keywords){
       // Query
-      $query = 'SELECT c.name as category_name, t.name as tag_name, a.id, a.cate_id, a.tag_id, a.title, a.intro, a.content, a.author, a.date_created
+      $query = 'SELECT c.name as category_name, t.name as tag_name, a.id, a.cate_id, a.tag_id, a.title, a.intro, a.image, a.content, a.author, a.date_created
       FROM ' . $this->table . ' a
       LEFT JOIN
         category c ON a.cate_id = c.id

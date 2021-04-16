@@ -32,6 +32,7 @@ if($num > 0) {
       'id' => $id,
       'title' => $title,
       'intro' => html_entity_decode($intro),
+      'image' => $image,
       'content' => html_entity_decode($content),
       'author' => $author,
       'cate_id' => $cate_id,

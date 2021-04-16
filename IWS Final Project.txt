@@ -1,0 +1,21 @@
+
+=== IWS Final Project ===
+
+Database:
+
+Article: id, title, intro, image, content, date_created, author, cate
+_id, tag_id
+
+Category: id, name, date_created
+
+Tag: id, name, date_created
+
+Comment: id, username, email,  content
+
+// Test API
+
+http://localhost:8088/myNews/api/article/read.php
+
+http://localhost:8088/myNews/api/article/read_one.php?id=2
+
+http://localhost:8088/myNews/api/article/search.php?s=hotel

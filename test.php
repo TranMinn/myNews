@@ -33,6 +33,7 @@ if(isset($response['status'])){
             <tr>
                 <td>ID</td>
                 <td>Title</td>
+                <td>Image</td>
                 <td>Author</td>
             </tr>
 
@@ -41,11 +42,11 @@ if(isset($response['status'])){
                   echo "<tr>
                     <td>".$list['id']."</td>
                     <td>".$list['title']."</td>
+                    <td>".$list['image']."</td>
                     <td>".$list['author']."</td>
                     
                   </tr>";
               }  
-
             
             ?>
 

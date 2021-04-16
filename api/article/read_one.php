@@ -24,6 +24,7 @@
         'id' => $article->id,
         'title' => $article->title,
         'intro' => $article->intro,
+        'image' => $article->image,
         'content' => $article->content,
         'author' => $article->author,
         'cate_id' => $article->cate_id,
