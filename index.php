@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="no-js" lang="zxx">
     <head>
@@ -6,7 +7,6 @@
         <title>My News</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="manifest" href="site.webmanifest">
 		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
 		<!-- CSS here -->
@@ -26,30 +26,36 @@
 
    <body>
 
-    <!-- Navigation -->
-    <?php include('includes/header.php');?>
+        <!-- Preloader Start -->
+        <div id="preloader-active">
+                <div class="preloader d-flex align-items-center justify-content-center">
+                    <div class="preloader-inner position-relative">
+                        <div class="preloader-circle"></div>
+                        <div class="preloader-img pere-text">
+                            <img src="assets/img/logo/logo.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Preloader End -->
 
-    <!-- Page Content -->
+        <!-- Navigation -->
+        <header>
+        <?php include('includes/header.php');?>
+        </header>
 
-    <main>
+        <!-- Page Content -->
+        <main>
+            <!-- Articles Area -->
+            <?php include('includes/feed.php');?>
 
-    <!-- Trending Area -->
+            <!-- Youtube -->
 
-    <!--  Weekly-News -->
-
-    <!-- Category -->
-
-    <!-- Slides -->
-
-    <!-- Youtube -->
-
-    
-    </main>
+        </main>
 
 
-
-    <!-- Footer -->
-    <?php include('includes/footer.php');?>
+        <!-- Footer -->
+        <?php include('includes/footer.php');?>
 
 
     <!-- JS here -->

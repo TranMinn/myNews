@@ -2,7 +2,6 @@
 
 // Simple GET request
 
-
 // Resource Address
 
 $url = "http://localhost:8088/myNews/api/article/read.php";
@@ -38,6 +37,15 @@ if(isset($response['status'])){
 
         <!-- Control with variable i -->
 
+        <div>
+            <img src="articleImages/<?php echo htmlentities($data[4]['image']);?>" alt="<?php echo htmlentities($data[4]['title']);?>">
+            <div>
+              <h2><?php echo htmlentities($data[4]['title']);?></h2>
+                 <p><b>Author : </b><?php echo htmlentities($data[4]['author']);?></a> </p>
+       
+              <a href="">Read More &rarr;</a>
+            </div>
+
         <?php
         for($i = 0; $i < count($data); $i++){
             ?> 
@@ -53,13 +61,15 @@ if(isset($response['status'])){
 
         <?php } ?>
 
-<?php
+        <?php
     }else{
         echo $response['data'];
     }
 }else{
     echo "API failed!";
 }
+
+?>
 
 
 
