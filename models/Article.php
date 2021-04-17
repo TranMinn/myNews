@@ -112,13 +112,134 @@ class Article{
 
     }
 
-    // TO-DO:
-
     // CREATE ARTICLE
+  public function create() {
+    //create query
+    $query = 'INSERT INTO' . $this->table . '
+      SET
+        id = :id,
+        title = :title,
+        intro = :intro,
+        image = :image,
+        content = :content,
+        date_created = :date_created,
+        author = :author,
+        cate_id = :cate_id,
+        tag_id = :tag_id';
+
+    // Prepared Statement
+    $stmt = $this->conn->prepare($query);
+
+    //clean data
+    $this->id=htmlspecialchars(strip_tags($this->id));
+    $this->title=htmlspecialchars(strip_tags($this->title));
+    $this->intro=htmlspecialchars(strip_tags($this->intro));
+    $this->image=htmlspecialchars(strip_tags($this->image));
+    $this->content=htmlspecialchars(strip_tags($this->content));
+    $this->date_created=htmlspecialchars(strip_tags($this->date_created));
+    $this->author=htmlspecialchars(strip_tags($this->author));
+    $this->cate_id=htmlspecialchars(strip_tags($this->cate_id));
+    $this->tag_id=htmlspecialchars(strip_tags($this->tag_id));
+
+    //bind data
+    $stmt->bindParam(":id", $this->id);
+    $stmt->bindParam(":title", $this->title);
+    $stmt->bindParam(":intro", $this->intro);
+    $stmt->bindParam(":image", $this->image);
+    $stmt->bindParam(":content", $this->content);
+    $stmt->bindParam(":date_created", $this->date_created);
+    $stmt->bindParam(":author", $this->author);
+    $stmt->bindParam(":cate_id", $this->cate_id);
+    $stmt->bindParam(":tag_id", $this->tag_id);
+
+     // execute query
+     if($stmt->execute()){
+      return true;
+     }
+      // error
+      printf("Error: %s.\n", $stmt->error);
+
+      return false;
+  }
 
     // UPDATE ARTICLE
+    function update(){
+  
+      // update query
+      $query = 'UPDATE
+                  ' . $this->table_name . '
+              SET
+              id = :id,
+              title = :title,
+              intro = :intro,
+              image = :image,
+              content = :content,
+              date_created = :date_created,
+              author = :author,
+              cate_id = :cate_id,
+              tag_id = :tag_id
+              WHERE
+                  id = :id';
+    
+      // prepare query statement
+      $stmt = $this->conn->prepare($query);
+    
+      // clean data
+      $this->id=htmlspecialchars(strip_tags($this->id));
+      $this->title=htmlspecialchars(strip_tags($this->title));
+      $this->intro=htmlspecialchars(strip_tags($this->intro));
+      $this->image=htmlspecialchars(strip_tags($this->image));
+      $this->content=htmlspecialchars(strip_tags($this->content));
+      $this->date_created=htmlspecialchars(strip_tags($this->date_created));
+      $this->author=htmlspecialchars(strip_tags($this->author));
+      $this->cate_id=htmlspecialchars(strip_tags($this->cate_id));
+      $this->tag_id=htmlspecialchars(strip_tags($this->tag_id));
+    
+      // bind new values
+      $stmt->bindParam(":id", $this->id);
+      $stmt->bindParam(":title", $this->title);
+      $stmt->bindParam(":intro", $this->intro);
+      $stmt->bindParam(":image", $this->image);
+      $stmt->bindParam(":content", $this->content);
+      $stmt->bindParam(":date_created", $this->date_created);
+      $stmt->bindParam(":author", $this->author);
+      $stmt->bindParam(":cate_id", $this->cate_id);
+      $stmt->bindParam(":tag_id", $this->tag_id);
+    
+     // execute query
+     if($stmt->execute()){
+      return true;
+     }
+      // error
+      printf("Error: %s.\n", $stmt->error);
+
+      return false;
+  }
 
     // DELETE ARTICLE
+    function delete(){
+  
+      // delete query
+      $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+    
+      // prepare query
+      $stmt = $this->conn->prepare($query);
+    
+      // sanitize
+      $this->id=htmlspecialchars(strip_tags($this->id));
+    
+      // bind id of record to delete
+      $stmt->bindParam(1, $this->id);
+    
+      // execute query
+     if($stmt->execute()){
+      return true;
+     }
+      // error
+      printf("Error: %s.\n", $stmt->error);
+
+      return false;
+  }
     
 
 }
