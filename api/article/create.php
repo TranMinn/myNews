@@ -48,7 +48,7 @@ if($article->create()){
     http_response_code(201);
 
     // tell the user
-    echo json_encode(array("message" => "Article was created."));
+    echo json_encode(array('status' => 201, 'data' => "Article was created."));
 }
 
 // if unable to create the product, tell the user
@@ -58,7 +58,7 @@ else{
     http_response_code(503);
 
     // tell the user
-    echo json_encode(array("message" => "Unable to create Article!"));
+    echo json_encode(array('status' => 503, 'data' =>  "Unable to create Article!"));
 }
 }
 
@@ -69,7 +69,7 @@ else{
 http_response_code(400);
 
 // tell the user
-echo json_encode(array("message" => "Unable to create product. Incomplete data!"));
+echo json_encode(array('status' => 400, 'data' =>  "Unable to create product. Incomplete data!"));
 }
 
 

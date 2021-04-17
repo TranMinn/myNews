@@ -41,7 +41,7 @@ if($article->update()){
     http_response_code(200);
   
     // tell the user
-    echo json_encode(array("message" => "Article was updated."));
+    echo json_encode(array('status' => 200, 'data' => "Article was updated."));
 }
   
 // if unable to update the article, tell the user
@@ -51,6 +51,6 @@ else{
     http_response_code(503);
   
     // tell the user
-    echo json_encode(array("message" => "Unable to update Article."));
+    echo json_encode(array('status' => 503, 'data' => "Unable to update Article."));
 }
 ?>
