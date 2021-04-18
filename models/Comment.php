@@ -8,6 +8,7 @@ class Comment{
     // Category properties
     public $id;
     public $article_id;
+    public $username;
     public $content;
     public $date_created;
 
@@ -19,7 +20,7 @@ class Comment{
     // GET COMMENTS
     public function read(){
         // Query
-        $query = 'SELECT a.title as title, cm.id, cm.article_id, cm.content, cm.date_created
+        $query = 'SELECT a.title as title, cm.id, cm.article_id, cm.username, cm.content, cm.date_created
                                 FROM ' . $this->table . ' cm
                                 LEFT JOIN
                                   article a ON cm.article_id = a.id
@@ -38,7 +39,7 @@ class Comment{
     // GET ONE COMMENT
     public function read_one(){
         // Query
-        $query = 'SELECT a.title as title, cm.id, cm.article_id, cm.content, cm.date_created
+        $query = 'SELECT a.title as title, cm.id, cm.article_id, cm.username, cm.content, cm.date_created
                                 FROM ' . $this->table . ' cm
                                 LEFT JOIN
                                   article a ON cm.article_id = a.id
@@ -60,6 +61,7 @@ class Comment{
         // Set Properties
         $this->id = $row['id'];
         $this->content = $row['content'];
+        $this->username = $row['username'];
         $this->article_id = $row['article_id'];
         $this->title = $row['title'];
 
