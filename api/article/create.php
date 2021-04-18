@@ -37,7 +37,7 @@ if(
     $article->cate_id = $data->cate_id;
     $article->tag_id = $data->tag_id;
 
-// create the product
+// create the Article
 if($article->create()){
   
     // set response code - 201 created
@@ -47,7 +47,7 @@ if($article->create()){
     echo json_encode(array('status' => 201, 'data' => "Article was created."));
 }
 
-// if unable to create the product, tell the user
+// if unable to create the Article, tell the user
 else{
 
     // set response code - 503 service unavailable
@@ -65,7 +65,7 @@ else{
 http_response_code(400);
 
 // tell the user
-echo json_encode(array('status' => 400, 'data' =>  "Unable to create product. Incomplete data!"));
+echo json_encode(array('status' => 400, 'data' =>  "Unable to create Article. Incomplete data!"));
 }
 
 
