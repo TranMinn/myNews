@@ -57,12 +57,97 @@ class Category{
         
     // TO-DO:
         
-    // CREATE ARTICLE
+    // CREATE CATE
+    public function create() {
+        //create query
+        $query = 'INSERT INTO' . $this->table . '
+          SET
+            id = :id,
+            name = :name,
+            date_created = :date_created';
+    
+        // Prepared Statement
+        $stmt = $this->conn->prepare($query);
+    
+        //clean data
+        $this->id=htmlspecialchars(strip_tags($this->id));
+        $this->title=htmlspecialchars(strip_tags($this->name));
+        $this->date_created=htmlspecialchars(strip_tags($this->date_created));
+     
+        //bind data
+        $stmt->bindParam(":id", $this->id);
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":date_created", $this->date_created);
+     
+         // execute query
+         if($stmt->execute()){
+          return true;
+         }
+          // error
+          printf("Error: %s.\n", $stmt->error);
+    
+          return false;
+      }
 
-    // UPDATE ARTICLE
-
-    // DELETE ARTICLE
-
+    // UPDATE CATE
+    function update(){
+  
+        // update query
+        $query = 'UPDATE
+                    ' . $this->table_name . '
+                SET
+                id = :id,
+                name = :name,
+                date_created = :date_created,
+                WHERE
+                    id = :id';
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+      
+        // clean data
+        $this->id=htmlspecialchars(strip_tags($this->id));
+        $this->name=htmlspecialchars(strip_tags($this->name));
+        $this->date_created=htmlspecialchars(strip_tags($this->date_created));
+        
+      
+        // bind new values
+        $stmt->bindParam(":id", $this->id);
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":date_created", $this->date_created);
+        
+       // execute query
+       if($stmt->execute()){
+        return true;
+       }
+        // error
+        printf("Error: %s.\n", $stmt->error);
+  
+        return false;
+    }
+    // DELETE CATE
+    function delete(){
+  
+        // delete query
+        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+      
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+      
+        // sanitize
+        $this->id=htmlspecialchars(strip_tags($this->id));
+      
+        // bind id of record to delete
+        $stmt->bindParam(1, $this->id);
+      
+        // execute query
+       if($stmt->execute()){
+        return true;
+       }
+        // error
+        printf("Error: %s.\n", $stmt->error);
+  
+        return false;
     }
 
 }
