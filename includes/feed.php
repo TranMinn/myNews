@@ -68,11 +68,11 @@ if(isset($response['status'])){
                                 <div class="col-lg-4">
                                 <div class="single-bottom mb-35">
                                     <div class="trend-bottom-img mb-30">
-                                        <img src="articleImages/<?php echo htmlentities($data[$i]['image']);?>" alt="">
+                                        <img src="articleImages/<?php echo htmlentities($data[$i]['image']);?>" height="150px">
                                     </div>
                                     <div class="trend-bottom-cap">
                                         <span class="color1"><?php echo htmlentities($data[$i]['category_name']);?></span>
-                                        <h4><a href="details.html"><?php echo htmlentities($data[$i]['title']);?></a></h4>
+                                        <h4><a href="article_details.php?id=<?php echo htmlentities($data[$i]['id'])?>"><?php echo htmlentities($data[$i]['title']);?></a></h4>
                                     </div>
                                 </div>
                                 </div>
@@ -94,7 +94,7 @@ if(isset($response['status'])){
                             </div>
                             <div class="trand-right-cap">
                                 <span class="color1"><?php echo htmlentities($data[$i]['tag_name']);?></span>
-                                <h4><a href="details.html"><?php echo htmlentities($data[$i]['title']);?></a></h4>
+                                <h4><a href="article_details.php?id=<?php echo htmlentities($data[$i]['id'])?>"><?php echo htmlentities($data[$i]['title']);?></a></h4>
                             </div>
                         </div>
 
@@ -131,7 +131,7 @@ if(isset($response['status'])){
                                 </div>
                                 <div class="weekly-caption">
                                     <span class="color1"><?php echo htmlentities($data[$i]['category_name']);?></span>
-                                    <h4><a href="#"><?php echo htmlentities($data[$i]['title']);?></a></h4>
+                                    <h4><a href="article_details.php?id=<?php echo htmlentities($data[$i]['id'])?>"><?php echo htmlentities($data[$i]['title']);?></a></h4>
                                 </div>
                             </div> 
 
@@ -544,9 +544,6 @@ if(isset($response['status'])){
         </div>
     </section>
     <!-- Whats New End -->
-
-
-
 
 
 <?php

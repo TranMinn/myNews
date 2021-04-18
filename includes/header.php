@@ -8,8 +8,8 @@
                                 <div class="row d-flex justify-content-between align-items-center">
                                     <div class="header-info-left">
                                         <ul>     
-                                            <li><img src="assets/img/icon/header_icon1.png" alt="">34ºc, Sunny </li>
-                                            <li><img src="assets/img/icon/header_icon1.png" alt="">Tuesday, 18th June, 2019</li>
+                                            <li><img src="assets/img/icon/header_icon1.png" alt="">22ºc, Sunny </li>
+                                            <li><img src="assets/img/icon/header_icon1.png" alt="">Monday, 19th April, 2021</li>
                                         </ul>
                                     </div>
                                     <div class="header-info-right">
@@ -68,18 +68,26 @@
                                             </ul>
                                         </nav>
                                     </div>
-                                </div>             
+                                </div>  
+
+                                <?php
+                                if(isset($_POST['submit'])){
+                                    require "search.php";
+                                }
+                                ?>
+
                                 <div class="col-xl-2 col-lg-2 col-md-4">
                                     <div class="header-right-btn f-right d-none d-lg-block">
                                         <i class="fas fa-search special-tag"></i>
                                         <div class="search-box">
-                                            <form action="#">
-                                                <input type="text" placeholder="Search">
-                                                
+                                            <form action="search.php" method = "POST">
+                                                <input name = "s" type="text" placeholder="Search">
+                                                <input type = "submit" value = "Search"/>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <!-- Mobile Menu -->
                                 <div class="col-12">
                                     <div class="mobile_menu d-block d-md-none"></div>
