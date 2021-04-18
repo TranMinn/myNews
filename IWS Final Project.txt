@@ -10,7 +10,7 @@ Category: id, name, date_created
 
 Tag: id, name, date_created
 
-Comment: id, username, email,  content
+Comment: id, username, content
 
 // Test API
 
@@ -19,6 +19,46 @@ http://localhost:8088/myNews/api/article/read.php
 http://localhost:8088/myNews/api/article/read_one.php?id=2
 
 http://localhost:8088/myNews/api/article/search.php?s=hotel
+
+http://localhost:8088/myNews/api/article/create.php
+
+-> POST
+-> Header: Key- Content-Type, value - application/json
+-> Body: Raw
+{
+    "cate_id": "2",
+    "tag_id": "1",
+    "title": "abc",
+    "intro": "intro",
+    "image": "image.jpg",
+    "content": "content abc",
+    "author": "hihi"
+}
+
+http://localhost:8088/myNews/api/article/update.php
+
+-> PUT
+-> Header: ...
+-> Body: Raw
+{
+    "cate_id": "2",
+    "tag_id": "1",
+    "title": "abc updated",
+    "intro": "intro updated",
+    "image": "image.jpg",
+    "content": "content abc updated",
+    "author": "hihi updated",
+    "id": "7"
+}
+
+http://localhost:8088/myNews/api/article/delete.php
+
+-> delete
+-> Header: ...
+-> Body: Raw
+{
+    id: "7"
+}
 
 ==================================================
 

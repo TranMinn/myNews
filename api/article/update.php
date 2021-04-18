@@ -12,7 +12,7 @@ include_once '../../models/Article.php';
   
 // get database connection
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->connect();
   
 // prepare article object
 $article = new Article($db);
@@ -24,12 +24,11 @@ $data = json_decode(file_get_contents("php://input"));
 $article->id = $data->id;
   
 // set article property values
-$article->id = $data->id;
 $article->title = $data->title;
 $article->intro = $data->intro;
 $article->image = $data->image;
 $article->content = $data->content;
-$article->date_created = date('Y-m-d H:i:s');
+// $article->date_created = date('Y-m-d H:i:s');
 $article->author = $data->author;
 $article->cate_id = $data->cate_id;
 $article->tag_id = $data->tag_id;

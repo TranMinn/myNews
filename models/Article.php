@@ -115,14 +115,12 @@ class Article{
     // CREATE ARTICLE
   public function create() {
     //create query
-    $query = 'INSERT INTO' . $this->table . '
+    $query = 'INSERT INTO ' . $this->table . '
       SET
-        id = :id,
         title = :title,
         intro = :intro,
         image = :image,
         content = :content,
-        date_created = :date_created,
         author = :author,
         cate_id = :cate_id,
         tag_id = :tag_id';
@@ -131,23 +129,19 @@ class Article{
     $stmt = $this->conn->prepare($query);
 
     //clean data
-    $this->id=htmlspecialchars(strip_tags($this->id));
     $this->title=htmlspecialchars(strip_tags($this->title));
     $this->intro=htmlspecialchars(strip_tags($this->intro));
     $this->image=htmlspecialchars(strip_tags($this->image));
     $this->content=htmlspecialchars(strip_tags($this->content));
-    $this->date_created=htmlspecialchars(strip_tags($this->date_created));
     $this->author=htmlspecialchars(strip_tags($this->author));
     $this->cate_id=htmlspecialchars(strip_tags($this->cate_id));
     $this->tag_id=htmlspecialchars(strip_tags($this->tag_id));
 
     //bind data
-    $stmt->bindParam(":id", $this->id);
     $stmt->bindParam(":title", $this->title);
     $stmt->bindParam(":intro", $this->intro);
     $stmt->bindParam(":image", $this->image);
     $stmt->bindParam(":content", $this->content);
-    $stmt->bindParam(":date_created", $this->date_created);
     $stmt->bindParam(":author", $this->author);
     $stmt->bindParam(":cate_id", $this->cate_id);
     $stmt->bindParam(":tag_id", $this->tag_id);
@@ -166,45 +160,41 @@ class Article{
     function update(){
   
       // update query
-      $query = 'UPDATE
-                  ' . $this->table_name . '
+      $query = 'UPDATE ' . $this->table . '
               SET
-              id = :id,
               title = :title,
               intro = :intro,
               image = :image,
               content = :content,
-              date_created = :date_created,
               author = :author,
               cate_id = :cate_id,
               tag_id = :tag_id
-              WHERE
-                  id = :id';
+              WHERE id = :id';
     
       // prepare query statement
       $stmt = $this->conn->prepare($query);
     
       // clean data
-      $this->id=htmlspecialchars(strip_tags($this->id));
+      
       $this->title=htmlspecialchars(strip_tags($this->title));
       $this->intro=htmlspecialchars(strip_tags($this->intro));
       $this->image=htmlspecialchars(strip_tags($this->image));
       $this->content=htmlspecialchars(strip_tags($this->content));
-      $this->date_created=htmlspecialchars(strip_tags($this->date_created));
       $this->author=htmlspecialchars(strip_tags($this->author));
       $this->cate_id=htmlspecialchars(strip_tags($this->cate_id));
       $this->tag_id=htmlspecialchars(strip_tags($this->tag_id));
+      $this->id=htmlspecialchars(strip_tags($this->id));
     
       // bind new values
-      $stmt->bindParam(":id", $this->id);
+      
       $stmt->bindParam(":title", $this->title);
       $stmt->bindParam(":intro", $this->intro);
       $stmt->bindParam(":image", $this->image);
       $stmt->bindParam(":content", $this->content);
-      $stmt->bindParam(":date_created", $this->date_created);
       $stmt->bindParam(":author", $this->author);
       $stmt->bindParam(":cate_id", $this->cate_id);
       $stmt->bindParam(":tag_id", $this->tag_id);
+      $stmt->bindParam(":id", $this->id);
     
      // execute query
      if($stmt->execute()){
@@ -220,7 +210,7 @@ class Article{
     function delete(){
   
       // delete query
-      $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+      $query = "DELETE FROM " . $this->table . " WHERE id = ?";
     
       // prepare query
       $stmt = $this->conn->prepare($query);

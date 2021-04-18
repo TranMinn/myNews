@@ -21,22 +21,18 @@ $article = new Article($db);
 $data = json_decode(file_get_contents("php://input"));
 
 if(
-    !empty($data->id) &&
     !empty($data->title) &&
     !empty($data->intro) &&
     !empty($data->image) &&
     !empty($data->content) &&
-    !empty($data->date_created) &&
     !empty($data->author) &&
     !empty($data->cate_id) &&
     !empty($data->tag_id) 
 ){
-    $article->id = $data->id;
     $article->title = $data->title;
     $article->intro = $data->intro;
     $article->image = $data->image;
     $article->content = $data->content;
-    $article->date_created = date('Y-m-d H:i:s');
     $article->author = $data->author;
     $article->cate_id = $data->cate_id;
     $article->tag_id = $data->tag_id;

@@ -12,7 +12,7 @@ include_once '../../models/Article.php';
   
 // get database connection
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->connect();
   
 // prepare article object
 $article = new Article($db);
