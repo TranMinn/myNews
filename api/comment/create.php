@@ -21,18 +21,14 @@ $comment = new Comment($db);
 $data = json_decode(file_get_contents("php://input"));
 
 if(
-    !empty($data->id) &&
     !empty($data->article_id) &&
     !empty($data->username) &&
     !empty($data->content) &&
-    !empty($data->date_created)
     
 ){
-    $comment->id = $data->id;
     $comment->article_id = $data->article_id;
     $comment->username = $data->username;
     $comment->content = $data->content;
-    $comment->date_created = date('Y-m-d H:i:s');
     
 // create the comment
 if($comment->create()){

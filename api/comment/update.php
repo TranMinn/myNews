@@ -24,11 +24,9 @@ $data = json_decode(file_get_contents("php://input"));
 $comment->id = $data->id;
   
 // set comment property values
-$comment->id = $data->id;
 $comment->article_id = $data->article_id;
 $comment->username = $data->username;
 $comment->content = $data->content;
-$comment->date_created = date('Y-m-d H:i:s');
 
   
 // update the comment
