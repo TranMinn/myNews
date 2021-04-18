@@ -27,6 +27,7 @@
         'image' => $article->image,
         'content' => $article->content,
         'author' => $article->author,
+        'date_created' => $article->date_created,
         'cate_id' => $article->cate_id,
         'category_name' => $article->category_name,
         'tag_id' => $article->tag_id,

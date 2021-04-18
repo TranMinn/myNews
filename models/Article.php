@@ -72,6 +72,7 @@ class Article{
         $this->image = $row['image'];
         $this->content = $row['content'];
         $this->author = $row['author'];
+        $this->date_created = $row['date_created'];
         $this->cate_id = $row['cate_id'];
         $this->category_name = $row['category_name'];
         $this->tag_id = $row['tag_id'];

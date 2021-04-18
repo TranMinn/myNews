@@ -54,7 +54,7 @@ if(isset($response['status'])){
                                 <img src="articleImages/<?php echo htmlentities($data[0]['image']);?>">
                                 <div class="trend-top-cap">
                                     <span><?php echo htmlentities($data[0]['category_name']);?></span>
-                                    <h2><a href="details.html"><?php echo htmlentities($data[0]['title']);?></a></h2>
+                                    <h2><a href="article_details.php?id=<?php echo htmlentities($data[0]['id'])?>"><?php echo htmlentities($data[0]['title']);?></a></h2>
                                 </div>
                             </div>
                         </div>

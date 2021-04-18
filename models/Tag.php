@@ -54,6 +54,8 @@ class Tag{
         $this->id = $row['id'];
         $this->name = $row['name'];
 
+    }
+
         
         
     // CREATE TAG
@@ -90,7 +92,7 @@ class Tag{
     
 
     // UPDATE TAG
-    function update(){
+    public function update(){
   
         // update query
         $query = 'UPDATE
@@ -127,7 +129,7 @@ class Tag{
     }
 
     // DELETE TAG
-    function delete(){
+    public function delete(){
   
         // delete query
         $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
