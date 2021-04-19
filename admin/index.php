@@ -1,11 +1,46 @@
-
 <?php
-  if(isset($_POST['submit'])){
-    require "dashboard.php";
+    session_start();
+
+    if(isset($_POST['login'])){
+      
+      // Resource Address
+      $url = "http://localhost:8088/myNews/api/admin/read.php";
+
+      // Send request to resource
+      $client = curl_init($url);
+
+      // Set options
+      curl_setopt($client, CURLOPT_URL, $url);
+      curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+
+      // get response 
+      $response = curl_exec($client);
+      curl_close($client);
+
+      $response = json_decode($response, true);
+
+      if(isset($response['status'])){
+        if($response['status'] == '200'){
+    
+            $data = $response['data'];
+
+            // User input
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+
+            if($data[0]['username'] == $username && $data[0]['password'] == $password){
+              echo "<script>alert('Right Password');</script>";
+              $_SESSION['login'] = $username;
+              echo "<script type='text/javascript'> window.location.href = 'dashboard.php'; </script>";
+            }else{
+              echo "<script>alert('Wrong Password');</script>";
+            }
+
   }
+}
+}
+
 ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +58,7 @@
     <i class="icon ion-ios-ionic-outline" aria-hidden="true"></i>
     <p>Welcome back</p>
   </div>
-  <form action="#" method="POST" class="signupForm" name="signupform">
+  <form method="POST" class="signinForm" name="signinform">
     <h2>Admin Login</h2>
     <ul class="noBullet">
       <li>
@@ -34,8 +69,9 @@
         <label for="password"></label>
         <input type="password" class="inputFields" id="password" name="password" placeholder="Password" required/>
       </li>
+
       <li id="center-btn">
-        <input type="submit" id="join-btn" name="submit" alt="Join" value="Login">
+        <input type="submit" id="join-btn" name="login" alt="Login" value="Login">
       </li>
     </ul>
   </form>

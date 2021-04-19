@@ -3,9 +3,11 @@ session_start();
 error_reporting(0);
 if(strlen($_SESSION['login'])==0)
   { 
-header('location:index.php');
+    session_destroy();
+    header('location:index.php');
 }
 else{
+    
     ?>
 
 <!DOCTYPE html>
