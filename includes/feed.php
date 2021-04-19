@@ -1,27 +1,12 @@
-
 <?php
 
-// Resource Address
+include 'consume.php';
 
+// Resource Address
 $url = "http://localhost:8088/myNews/api/article/read.php";
 
-// Send request to resource
-$client = curl_init($url);
+$data = consume($url);
 
-// Set options
-curl_setopt($client, CURLOPT_URL, $url);
-curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-
-// Get response 
-$response = curl_exec($client);
-curl_close($client);
-
-// Decode response
-$response = json_decode($response, true);
-
-if(isset($response['status'])){
-    if($response['status'] == '200'){
-        $data = $response['data'];
 ?>
 
 
@@ -544,14 +529,3 @@ if(isset($response['status'])){
         </div>
     </section>
     <!-- Whats New End -->
-
-
-<?php
-    }else{
-        echo $response['data'];
-    }
-}else{
-    echo "API failed!";
-}
-
-?>

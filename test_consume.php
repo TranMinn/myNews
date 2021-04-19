@@ -1,6 +1,6 @@
 <?php
 
-include 'Consume.php';
+include 'consume.php';
 
     $url = "http://localhost:8088/myNews/api/article/read.php";
 

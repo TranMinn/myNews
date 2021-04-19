@@ -73,7 +73,7 @@ else{
                                     <h4 class="page-title">Dashboard</h4>
                                     <ol class="breadcrumb p-0 m-0">
                                         <li>
-                                            <a href="#">NewsPortal</a>
+                                            <a href="#">AZ News</a>
                                         </li>
                                         <li>
                                             <a href="#">Admin</a>

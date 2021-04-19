@@ -1,46 +1,33 @@
 <?php
+      
+    include '../consume.php';
+
     session_start();
 
     if(isset($_POST['login'])){
       
+
       // Resource Address
       $url = "http://localhost:8088/myNews/api/admin/read.php";
 
-      // Send request to resource
-      $client = curl_init($url);
-
-      // Set options
-      curl_setopt($client, CURLOPT_URL, $url);
-      curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-
-      // get response 
-      $response = curl_exec($client);
-      curl_close($client);
-
-      $response = json_decode($response, true);
-
-      if(isset($response['status'])){
-        if($response['status'] == '200'){
-    
-            $data = $response['data'];
+      $data = consume($url);
 
             // User input
             $username = $_POST['username'];
             $password = $_POST['password'];
 
             if($data[0]['username'] == $username && $data[0]['password'] == $password){
-              echo "<script>alert('Right Password');</script>";
+              // echo "<script>alert('Right Password');</script>";
               $_SESSION['login'] = $username;
               echo "<script type='text/javascript'> window.location.href = 'dashboard.php'; </script>";
             }else{
               echo "<script>alert('Wrong Password');</script>";
             }
 
-  }
-}
 }
 
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
