@@ -115,17 +115,19 @@ class Comment{
         $stmt = $this->conn->prepare($query);
 
         // Clean Data
-        $this->id = htmlspecialchars(strip_tags($this->id));
+        
         $this->article_id = htmlspecialchars(strip_tags($this->article_id));
         $this->username = htmlspecialchars(strip_tags($this->username));
         $this->content = htmlspecialchars(strip_tags($this->content));
-       
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
         // Bind Data
-        $stmt->bindParam(':id', $this->id);
+        
         $stmt->bindParam(':article_id', $this->article_id);
         $stmt->bindParam(':username', $this->username);
         $stmt->bindParam(':content', $this->content);
-
+        $stmt->bindParam(':id', $this->id);
+        
         // Execute Query
         if($stmt->execute()) {
             return true;

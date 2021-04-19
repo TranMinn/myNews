@@ -24,9 +24,9 @@ $data = json_decode(file_get_contents("php://input"));
 $tacategoryg->id = $data->id;
   
 // set category property values
-$category->id = $data->id;
+
 $category->name = $data->name;
-$category->date_created = date('Y-m-d H:i:s');
+
 
   
 // update the category

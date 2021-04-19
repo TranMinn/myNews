@@ -21,14 +21,13 @@ $tag = new Tag($db);
 $data = json_decode(file_get_contents("php://input"));
 
 if(
-    !empty($data->id) &&
-    !empty($data->name) &&
-    !empty($data->date_created)
+    
+    !empty($data->name) 
     
 ){
-    $tag->id = $data->id;
+    
     $tag->name = $data->name;
-    $tag->date_created = date('Y-m-d H:i:s');
+    
     
 // create the tag
 if($tag->create()){

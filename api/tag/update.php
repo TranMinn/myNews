@@ -24,9 +24,9 @@ $data = json_decode(file_get_contents("php://input"));
 $tag->id = $data->id;
   
 // set tag property values
-$tag->id = $data->id;
+
 $tag->name = $data->name;
-$tag->date_created = date('Y-m-d H:i:s');
+
 
   
 // update the tag

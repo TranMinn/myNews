@@ -100,13 +100,14 @@ class Category{
         $stmt = $this->conn->prepare($query);
       
         // clean data
-        $this->id=htmlspecialchars(strip_tags($this->id));
-        $this->name=htmlspecialchars(strip_tags($this->name));
         
+        $this->name=htmlspecialchars(strip_tags($this->name));
+        $this->id=htmlspecialchars(strip_tags($this->id));
       
         // bind new values
-        $stmt->bindParam(":id", $this->id);
+        
         $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":id", $this->id);
         
        // execute query
        if($stmt->execute()){
