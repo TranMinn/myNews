@@ -12,7 +12,7 @@
                             </li>
 
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-list-bulleted"></i> <span> Category </span> <span class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-list-bulleted"></i> <span> Categories </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
                                 	<li><a href="add-category.php">Add Category</a></li>
                                     <li><a href="manage-categories.php">Manage Category</a></li>
@@ -20,7 +20,7 @@
                             </li>
 
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-list-bulleted"></i> <span> Tag </span> <span class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-list-bulleted"></i> <span> Tags </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="add-tag.php">Add Tag</a></li>
                                     <li><a href="manage-tags.php">Manage Tags</a></li>
@@ -30,8 +30,8 @@
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-list-bulleted"></i> <span> Articles </span> <span class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="add-post.php">Add Article</a></li>
-                                    <li><a href="manage-posts.php">Manage Articles</a></li>
+                                    <li><a href="add-article.php">Add Article</a></li>
+                                    <li><a href="manage-articles.php">Manage Articles</a></li>
                                 </ul>
                             </li>  
 

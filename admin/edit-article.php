@@ -1,3 +1,18 @@
+<?php
+
+include '../consume.php';
+
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['login'])==0)
+  { 
+    session_destroy();
+    header('location:index.php');
+}
+else{
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -40,9 +55,9 @@
         <div id="wrapper">
 
             <!-- Top Bar Start -->
-           <?php include('includes/topheader.php');?>
+           <?php include('includes/header.php');?>
             <!-- ========== Left Sidebar Start ========== -->
-             <?php include('includes/leftsidebar.php');?>
+             <?php include('includes/sidebar.php');?>
             <!-- Left Sidebar End -->
 
 
@@ -68,7 +83,7 @@
                                             <a href="#"> Article </a>
                                         </li>
                                         <li class="active">
-                                            Add Article
+                                            Edit Article
                                         </li>
                                     </ol>
                                     <div class="clearfix"></div>
@@ -103,7 +118,7 @@
                                         <form name="addpost" method="post">
         <div class="form-group m-b-20">
             <label for="exampleInputEmail1">Title</label>
-            <input type="text" class="form-control" id="posttitle" value="<?php echo htmlentities($row['title']);?>" name="posttitle" placeholder="Enter title" required>
+            <input type="text" class="form-control" id="title" value="<?php echo htmlentities($row['title']);?>" name="posttitle" placeholder="Enter title" required>
         </div>
 
 
@@ -232,3 +247,5 @@
 
     </body>
 </html>
+
+<?php } ?>

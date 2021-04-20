@@ -1,3 +1,21 @@
+<?php
+
+include '../consume.php';
+
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['login'])==0)
+  { 
+    session_destroy();
+    header('location:index.php');
+}
+else{
+
+    // Get all Articles
+    $url = "http://localhost:8088/myNews/api/article/read.php";
+    $data = consume($url);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -89,11 +107,10 @@
 
                                                 <tr>                                      
                                                 <th>Title</th>
+                                                <th>Image</th>
                                                 <th>Category</th>
                                                 <th>Tag</th>
                                                 <th>Author</th>
-                                                <th>Intro</th>
-                                                <th>Content</th>
                                                 <th>Date created</th>
                                                 <th>Action</th>
                                                 </tr>
@@ -101,25 +118,23 @@
                                         </thead>
                                         <tbody>
 
-                                            <tr>
-
-                                            <td colspan="4" align="center"><h3 style="color:red">No record found</h3></td>
-                                            <tr>
+                                            <?php for($i = 0; $i < count($data); $i++){ ?>
 
                                             <tr>
-                                                <td><b></b></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><b><?php echo htmlentities($data[$i]['title']);?></b></td>
+                                                <td><img src="../articleImages/<?php echo htmlentities($data[$i]['image']);?>" width = "100px" height = "100px"></td>
+                                                <td><?php echo htmlentities($data[$i]['category_name']);?></td>
+                                                <td><?php echo htmlentities($data[$i]['tag_name']);?></td>
+                                                <td><?php echo htmlentities($data[$i]['author']);?></td>
+                                                <td><?php echo htmlentities($data[$i]['date_created']);?></td>
 
-                                                <td><a href="edit-article.php?id=<?php echo htmlentities($data['id']);?>">
+                                                <td><a href="edit-article.php?id=<?php echo htmlentities($data[$i]['id']);?>">
                                                 <i class="fa fa-pencil" style="color: #29b6f6;"></i></a> 
-                                                &nbsp;<a href="" onclick="return confirm('Do you really want to delete ?')"> <i class="fa fa-trash-o" style="color: #f05050"></i></a> </td>
+                                                &nbsp;<a href="manage-articles.php?id=<?php echo htmlentities($data[$i]['id']);?>&&action=del" onclick="return confirm('Do you really want to delete ?')"> 
+                                                <i class="fa fa-trash-o" style="color: #f05050;"></i></a> </td>
                                             </tr>
+
+                                            <?php } ?>
                                                
                                             </tbody>
                                         </table>
@@ -185,3 +200,5 @@
 
     </body>
 </html>
+
+<?php } ?>

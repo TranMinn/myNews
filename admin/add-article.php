@@ -1,3 +1,137 @@
+<?php
+
+include '../consume.php';
+
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['login'])==0)
+  { 
+    session_destroy();
+    header('location:index.php');
+}
+else{
+
+    // Get Categories & Tag
+    $url_cat = "http://localhost:8088/myNews/api/category/read.php";
+    $url_tag = "http://localhost:8088/myNews/api/tag/read.php";
+
+    $cate = consume($url_cat);
+    $tag = consume($url_tag);
+
+    // Add new Article
+    if(isset($_POST['submit'])){
+        
+        $title = $_POST['title'];
+        $intro = $_POST['intro'];
+        $author = $_POST['author'];
+        $content = $_POST['content'];
+        $cat = $_POST['category'];
+        $tag = $_POST['tag'];
+        $image = $_POST['image'];
+
+
+        $form_data = array(
+            'title' => $title,
+            'intro' => $intro,
+            'author' => $author,
+            'content' => $content,
+            'cate_id' => $cat,
+            'tag_id' => $tag,
+            'image' => $image
+        );
+
+        // $string = http_build_query($form_data);
+        
+        //     $title = $_POST['title'];
+        //     $intro = $_POST['intro'];
+        //     $author = $_POST['author'];
+        //     $content = $_POST['content'];
+        //     $category = $_POST['category'];
+        //     $tag = $_POST['tag'];
+
+        // $request = '{
+        //     "title" : "$title",
+        //     "intro" : "$intro",
+        //     "author" : "$author",
+        //     "content" : "$content",
+        //     "cate_id" : "$category",
+        //     "tag_id" : "$tag"
+        // }';
+
+        
+      
+    //   $image = $_POST['image']['name'];
+
+    //   // Image Extension
+    //   $extension = substr($image,strlen($image)-4,strlen($image));
+
+    //   // Allowed Extensions
+    //   $a_ex = array(".jpg","jpeg",".png",".gif");
+
+      // Validate Extension
+    //   if(!in_array($extension,$a_ex)){
+    //     echo "<script>alert('Invalid format. Only jpg / jpeg/ png /gif format allowed');</script>";
+    //   }else{
+
+        //Rename the image file
+        // $image = md5($image).$extension;
+
+        // Move image into directory
+        // move_uploaded_file($_FILES["image"]["tmp_name"],"addImages/".$imgnewfile);
+    // }
+
+    // json_encode($form_data)
+
+    $api_url = "http://localhost:8088/myNews/api/article/create.php";
+
+    $client = curl_init($api_url);
+    curl_setopt($client, CURLOPT_URL, $api_url);
+    curl_setopt($client, CURLOPT_POST, true);
+    curl_setopt($client, CURLOPT_POSTFIELDS, json_encode($form_data));
+    curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($client);
+
+    curl_close($client);
+
+    // echo "<script>alert('Failed');</script>";
+
+    // $err = curl_error($client);
+    // if($err){
+    //     echo "<script>alert('Failed');</script>";
+    // }else{
+
+    // $response = json_decode($response, true);
+    if($e = curl_error($client)){
+        echo $e;
+        $msg="Failed!!!";
+    }else{
+        $response = json_decode($response, true);
+        $msg="Post successfully added ";
+    }
+
+    
+
+    // if(isset($response['status'])){
+    //     if($response['status'] == '201'){
+    //         echo "<script>alert('Insert successfully');</script>";
+    //         $msg="Post successfully added ";
+    // //     header('location:manage-articles.php');
+    //     }
+    // }
+// }
+    // consume($url);
+
+    // if(consume($url)){
+    //     $msg="Post successfully added ";
+    //     header('location:manage-articles.php');
+    // }else{
+    //     $error="Something went wrong . Please try again."; 
+    // }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -40,9 +174,9 @@
         <div id="wrapper">
 
             <!-- Top Bar Start -->
-           <?php include('includes/topheader.php');?>
+           <?php include('includes/header.php');?>
             <!-- ========== Left Sidebar Start ========== -->
-             <?php include('includes/leftsidebar.php');?>
+             <?php include('includes/sidebar.php');?>
             <!-- Left Sidebar End -->
 
 
@@ -78,21 +212,21 @@
                         <!-- end row -->
 
 <div class="row">
-<div class="col-sm-6">  
-    <!---Success Message--->  
-    <?php if($msg){ ?>
-    <div class="alert alert-success" role="alert">
-    <strong>Well done!</strong> <?php echo htmlentities($msg);?>
+    <div class="col-sm-6">  
+        <!---Success Message--->  
+        <?php if($msg){ ?>
+        <div class="alert alert-success" role="alert">
+        <strong>Well done!</strong> <?php echo htmlentities($msg);?>
+        </div>
+        <?php } ?>
+
+        <!---Error Message--->
+        <?php if($error){ ?>
+            <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> <?php echo htmlentities($error);?></div>
+        <?php } ?>
+
     </div>
-    <?php } ?>
-
-    <!---Error Message--->
-    <?php if($error){ ?>
-    <div class="alert alert-danger" role="alert">
-    <strong>Oh snap!</strong> <?php echo htmlentities($error);?></div>
-    <?php } ?>
-
-</div>
 </div>
 
 
@@ -100,50 +234,74 @@
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="p-6">
                                     <div class="">
-<form name="addarticle" method="post" enctype="multipart/form-data">
+<form action = "add-article.php" method="POST">
     <div class="form-group m-b-20">
-    <label for="exampleInputEmail1">Title</label>
-    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
+        <label for="exampleInputEmail1">Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
     </div>
 
 
 
     <div class="form-group m-b-20">
-    <label for="exampleInputEmail1">Category</label>
-    <select class="form-control" name="category" id="category" required>
-    <option value="">Select Category </option>
+        <label for="exampleInputEmail1">Category</label>
+            <select class="form-control" name="category" id="category" required>
 
-    <option value="<?php echo htmlentities($result['id']);?>"><?php echo htmlentities($result['category_name']);?></option>
+            <!-- Category options -->
+            <?php for($i = 0; $i < count($cate); $i++){ ?>
 
+                <option value="<?php echo htmlentities($cate[$i]['id']);?>"><?php echo htmlentities($cate[$i]['name']);?></option>
+            
+            <?php } ?>
 
-    </select> 
+        </select> 
     </div>
         
     <div class="form-group m-b-20">
-    <label for="exampleInputEmail1">Tag</label>
-    <select class="form-control" name="tag" id="tag" required>
+        <label for="exampleInputEmail1">Tag</label>
+        <select class="form-control" name="tag" id="tag" required>
 
-    </select> 
+                <!-- Tag options -->
+            <?php for($i = 0; $i < count($tag); $i++){ ?>
+
+                <option value="<?php echo htmlentities($tag[$i]['id']);?>"><?php echo htmlentities($tag[$i]['name']);?></option>
+            
+            <?php } ?>
+
+        </select> 
+    </div>
+
+    <div class="form-group m-b-20">
+        <label for="exampleInputEmail1">Author</label>
+        <input type="text" class="form-control" id="author" name="author" placeholder="Enter author" required>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card-box">
+                <h4 class="m-b-30 m-t-0 header-title"><b>Article Introduction</b></h4>
+                <textarea class="summernote" name="intro" required></textarea>
+            </div>
+        </div>
     </div>
             
 
     <div class="row">
-    <div class="col-sm-12">
-    <div class="card-box">
-    <h4 class="m-b-30 m-t-0 header-title"><b>Article Details</b></h4>
-    <textarea class="summernote" name="description" required></textarea>
-    </div>
-    </div>
+        <div class="col-sm-12">
+            <div class="card-box">
+                <h4 class="m-b-30 m-t-0 header-title"><b>Article Content</b></h4>
+                <textarea class="summernote" name="content" required></textarea>
+            </div>
+        </div>
     </div>
 
 
     <div class="row">
-    <div class="col-sm-12">
-    <div class="card-box">
-    <h4 class="m-b-30 m-t-0 header-title"><b>Image</b></h4>
-    <input type="file" class="form-control" id="image" name="image"  required>
-    </div>
-    </div>
+        <div class="col-sm-12">
+            <div class="card-box">
+                <h4 class="m-b-30 m-t-0 header-title"><b>Image</b></h4>
+                <input type="file" class="form-control" id="image" name="image">
+            </div>
+        </div>
     </div>
 
 
@@ -231,8 +389,7 @@
         <!--Summernote js-->
         <script src="../plugins/summernote/summernote.min.js"></script>
 
-    
-
-
     </body>
 </html>
+
+<?php } ?>

@@ -35,6 +35,7 @@ if($num > 0) {
       'image' => $image,
       'content' => html_entity_decode($content),
       'author' => $author,
+      'date_created' => $date_created,
       'cate_id' => $cate_id,
       'category_name' => $category_name,
       'tag_id' => $tag_id,

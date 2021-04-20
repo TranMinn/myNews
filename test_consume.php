@@ -6,11 +6,12 @@ include 'consume.php';
 
     $data = consume($url);
 
-    echo count($data);
+    // echo count($data);
 
     // $result = implode(' ', $data);
 
     // print_r($data[0]);
+    
     for($i = 0; $i < count($data); $i++){
 ?>
 

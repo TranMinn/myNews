@@ -1,4 +1,7 @@
 <?php
+
+include '../consume.php';
+
 session_start();
 error_reporting(0);
 if(strlen($_SESSION['login'])==0)
@@ -7,7 +10,25 @@ if(strlen($_SESSION['login'])==0)
     header('location:index.php');
 }
 else{
-    
+
+    // Get Quantity
+
+    $url_ar = "http://localhost:8088/myNews/api/article/read.php";
+    $url_cat = "http://localhost:8088/myNews/api/category/read.php";
+    $url_tag = "http://localhost:8088/myNews/api/tag/read.php";
+    $url_cmt = "http://localhost:8088/myNews/api/comment/read.php";
+
+    $article = consume($url_ar);
+    $cate = consume($url_cat);
+    $tag = consume($url_tag);
+    $cmt = consume($url_cmt);
+                    
+    $countArticles = count($article);
+    $countCate = count($cate);
+    $countTag = count($tag);
+    $countCmt = count($cmt);
+
+
     ?>
 
 <!DOCTYPE html>
@@ -96,7 +117,7 @@ else{
                                     <div class="wigdet-one-content">
                                         <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="Statistics">Categories Listed</p>
 
-                                        <h2><?php echo htmlentities($countcat);?> <small></small></h2>
+                                        <h2><?php echo htmlentities($countCate);?> <small></small></h2>
                                     
                                     </div>
                                 </div>
@@ -108,7 +129,7 @@ else{
                                     <div class="wigdet-one-content">
                                         <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="User This Month">Listed Tags</p>
 
-                                        <h2><?php echo htmlentities($countsubcat);?> <small></small></h2>
+                                        <h2><?php echo htmlentities($countTag);?> <small></small></h2>
                               
                                     </div>
                                 </div>
@@ -122,7 +143,7 @@ else{
                                     <div class="wigdet-one-content">
                                         <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="User This Month">Live News</p>
 
-                                        <h2><?php echo htmlentities($countarticles);?> <small></small></h2>
+                                        <h2><?php echo htmlentities($countArticles);?> <small></small></h2>
                               
                                     </div>
                                 </div>
@@ -138,7 +159,7 @@ else{
                                     <i class="mdi mdi-layers widget-one-icon"></i>
                                     <div class="wigdet-one-content">
                                         <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="User This Month">Comments</p>
-                                        <h2><?php echo htmlentities($countcmts);?> <small></small></h2>
+                                        <h2><?php echo htmlentities($countCmt);?><small></small></h2>
                               
                                     </div>
                                 </div>

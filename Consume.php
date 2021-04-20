@@ -17,7 +17,7 @@
         $response = json_decode($response, true);
 
         if(isset($response['status'])){
-            if($response['status'] == '200'){
+            if($response['status'] == '200' || $response['status'] == '201'){
                 $data = $response['data'];
                 return $data;
             }else{
