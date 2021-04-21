@@ -55,35 +55,21 @@
             <div class="container">
                    <div class="row">
                         <div class="col-lg-8">
-                            <!-- Trending Tittle -->
-
+                            
                             <?php
+                            
+                            include 'consume.php';
 
                             // Get ID of the article
                             $id = intval($_GET['id']);
                             // Resource Address
                             $url = "http://localhost:8088/myNews/api/article/read_one.php?id=$id";
 
-                            // Send request to resource
-                            $client = curl_init($url);
-
-                            // Set options
-                            curl_setopt($client, CURLOPT_URL, $url);
-                            curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-
-                            // get response 
-                            $response = curl_exec($client);
-                            curl_close($client);
-
-                            $response = json_decode($response, true);
-
-                            if(isset($response['status'])){
-                                if($response['status'] == '200'){                            
-                                    $data = $response['data'];
+                            $data = consume($url);
                             
                             ?>
 
-
+                            <!-- Trending Tittle -->
                             <div class="about-right mb-90">
                                 <div class="about-img">
                                     <img src="articleImages/<?php echo htmlentities($data['image']);?>" alt="">
@@ -99,15 +85,6 @@
                             
                                     <p class="about-pera1 mb-25"><?php echo htmlentities($data['content']);?></p>
                                 </div> 
-
-                                <?php
-                                    }else{
-                                        echo $response['data'];
-                                    }
-                                }else{
-                                    echo "API failed!";
-                                }
-                                ?>
 
                                 <div class="social-share pt-30">
                                     <div class="section-tittle">

@@ -18,10 +18,13 @@ $db = $database->getConnection();
 $comment = new Comment($db);
   
 // get comment id
-$data = json_decode(file_get_contents("php://input"));
+// $data = json_decode(file_get_contents("php://input"));
   
 // set comment id to be deleted
-$comment->id = $data->id;
+// $comment->id = $data->id;
+
+// Get Comment ID
+$comment->id = isset($_GET['id']) ? $_GET['id'] : die();
   
 // delete the comment
 if($comment->delete()){

@@ -11,9 +11,38 @@ if(strlen($_SESSION['login'])==0)
 }
 else{
 
-    // Get all Articles
-    $url = "http://localhost:8088/myNews/api/article/read.php";
-    $data = consume($url);
+    if($_GET['action']='del'){
+
+        // Get ID of the article
+        $id = intval($_GET['id']);
+        // Resource Address
+        $url = "http://localhost:8088/myNews/api/article/delete.php?id=$id";
+
+        $data = consume($url);
+
+        // // Send request to resource
+        // $client = curl_init($url);
+
+        // // Set options
+        // curl_setopt($client, CURLOPT_URL, $url);
+        // curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+
+        // // get response 
+        // $response = curl_exec($client);
+        // curl_close($client);
+
+        // $response = json_decode($response, true);
+
+        // if(isset($response['status'])){
+        //     if($response['status'] == '200'){                            
+        //         // $data = $response['data'];
+        //         $msg="Post deleted ";
+        //     }else{
+        //         $error="Something went wrong . Please try again.";  
+        //     }
+        // }
+    }
+
 
 ?>
 
@@ -118,7 +147,13 @@ else{
                                         </thead>
                                         <tbody>
 
-                                            <?php for($i = 0; $i < count($data); $i++){ ?>
+                                            <?php 
+
+                                            // Get all Articles
+                                            $url = "http://localhost:8088/myNews/api/article/read.php";
+                                            $data = consume($url);
+                                            
+                                            for($i = 0; $i < count($data); $i++){ ?>
 
                                             <tr>
                                                 <td><b><?php echo htmlentities($data[$i]['title']);?></b></td>

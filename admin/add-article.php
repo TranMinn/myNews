@@ -27,8 +27,14 @@ else{
         $content = $_POST['content'];
         $cat = $_POST['category'];
         $tag = $_POST['tag'];
-        $image = $_POST['image'];
 
+        // Get submitted image file
+        if(isset($_FILES['image'])){
+            $image = $_FILES['image']['name'];
+        }
+
+        // The path to store uploaded image
+        $target = "../articleImages/".basename($_FILES['image']['name']);
 
         $form_data = array(
             'title' => $title,
@@ -39,48 +45,6 @@ else{
             'tag_id' => $tag,
             'image' => $image
         );
-
-        // $string = http_build_query($form_data);
-        
-        //     $title = $_POST['title'];
-        //     $intro = $_POST['intro'];
-        //     $author = $_POST['author'];
-        //     $content = $_POST['content'];
-        //     $category = $_POST['category'];
-        //     $tag = $_POST['tag'];
-
-        // $request = '{
-        //     "title" : "$title",
-        //     "intro" : "$intro",
-        //     "author" : "$author",
-        //     "content" : "$content",
-        //     "cate_id" : "$category",
-        //     "tag_id" : "$tag"
-        // }';
-
-        
-      
-    //   $image = $_POST['image']['name'];
-
-    //   // Image Extension
-    //   $extension = substr($image,strlen($image)-4,strlen($image));
-
-    //   // Allowed Extensions
-    //   $a_ex = array(".jpg","jpeg",".png",".gif");
-
-      // Validate Extension
-    //   if(!in_array($extension,$a_ex)){
-    //     echo "<script>alert('Invalid format. Only jpg / jpeg/ png /gif format allowed');</script>";
-    //   }else{
-
-        //Rename the image file
-        // $image = md5($image).$extension;
-
-        // Move image into directory
-        // move_uploaded_file($_FILES["image"]["tmp_name"],"addImages/".$imgnewfile);
-    // }
-
-    // json_encode($form_data)
 
     $api_url = "http://localhost:8088/myNews/api/article/create.php";
 
@@ -93,40 +57,19 @@ else{
 
     curl_close($client);
 
-    // echo "<script>alert('Failed');</script>";
-
-    // $err = curl_error($client);
-    // if($err){
-    //     echo "<script>alert('Failed');</script>";
-    // }else{
-
-    // $response = json_decode($response, true);
     if($e = curl_error($client)){
-        echo $e;
-        $msg="Failed!!!";
+        $error = "Upload failed!!!";
     }else{
         $response = json_decode($response, true);
-        $msg="Post successfully added ";
+        // Move uploaded image to folder articleImages
+        if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){
+            $msg = "Uploaded successfully";
+            echo "<script type='text/javascript'> window.location.href = 'manage-articles.php'; </script>";
+        }else{
+            $error = "Upload failed";
+        }
     }
 
-    
-
-    // if(isset($response['status'])){
-    //     if($response['status'] == '201'){
-    //         echo "<script>alert('Insert successfully');</script>";
-    //         $msg="Post successfully added ";
-    // //     header('location:manage-articles.php');
-    //     }
-    // }
-// }
-    // consume($url);
-
-    // if(consume($url)){
-    //     $msg="Post successfully added ";
-    //     header('location:manage-articles.php');
-    // }else{
-    //     $error="Something went wrong . Please try again."; 
-    // }
 }
 
 ?>
@@ -234,7 +177,7 @@ else{
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="p-6">
                                     <div class="">
-<form action = "add-article.php" method="POST">
+<form action = "add-article.php" method="POST" enctype="multipart/form-data">
     <div class="form-group m-b-20">
         <label for="exampleInputEmail1">Title</label>
         <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
@@ -299,7 +242,7 @@ else{
         <div class="col-sm-12">
             <div class="card-box">
                 <h4 class="m-b-30 m-t-0 header-title"><b>Image</b></h4>
-                <input type="file" class="form-control" id="image" name="image">
+                <input type="file" class="form-control" id="image" name="image" required>
             </div>
         </div>
     </div>

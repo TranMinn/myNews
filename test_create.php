@@ -1,4 +1,5 @@
 <?php
+
 if(isset($_POST['submit'])){
 
     // $form_data = array(
@@ -17,7 +18,13 @@ if(isset($_POST['submit'])){
     $content = $_POST['content'];
     $cat = $_POST['category'];
     $tag = $_POST['tag'];
-    $image = $_POST['image'];
+    // $image = $_POST['image'];
+
+    if(isset($_FILES['image'])){
+        $image = $_FILES['image']['name'];
+    }
+   
+    echo $image;
 
 
     $form_data = array(
@@ -30,7 +37,9 @@ if(isset($_POST['submit'])){
         'image' => $image
     );
 
-        // $string = http_build_query($form_data);
+
+    $target = "articleImages/".basename($_FILES['image']['name']);
+
 
     $api_url = "http://localhost:8088/myNews/api/article/create.php";
 
@@ -46,12 +55,22 @@ if(isset($_POST['submit'])){
         echo $e;
     }else{
         $response = json_decode($response, true);
-        foreach($response as $key => $val){
-            echo $key . ': ' . $val . '<br>';
+
+        echo "Uploaded successfully";
+
+        // Move uploaded image to folder articleImages
+        if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){
+            $msg = "Uploaded successfully";
+        }else{
+                $error = "Upload failed";
         }
     }
 
     curl_close($client);
+
+
+
+    
 
 }
 
@@ -60,10 +79,10 @@ if(isset($_POST['submit'])){
 
 <div>
 
-<form action = "test_create.php" method="POST">
+<form action = "test_create.php" method="POST" enctype="multipart/form-data">
 
     <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
-    <input type="file" class="form-control" id="tag" name="image" placeholder="Enter image" required>
+    <input type="file" class="form-control" id="image" name="image" placeholder="Enter image" required />
     <input type="text" class="form-control" id="intro" name="intro" placeholder="Enter intro" required>
     <input type="text" class="form-control" id="content" name="content" placeholder="Enter content" required>
     <input type="text" class="form-control" id="author" name="author" placeholder="Enter author" required>
@@ -86,3 +105,5 @@ if(isset($_POST['submit'])){
 
     </form>
 </div>
+
+<img src="../articleImages/<?php echo htmlentities($image);?>">

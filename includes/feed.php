@@ -36,7 +36,7 @@ $data = consume($url);
                         <!-- Trending Top -->
                         <div class="trending-top mb-30">
                             <div class="trend-top-img">
-                                <img src="articleImages/<?php echo htmlentities($data[0]['image']);?>">
+                                <img src="articleImages/<?php echo htmlentities($data[0]['image']);?>" height = "500px">
                                 <div class="trend-top-cap">
                                     <span><?php echo htmlentities($data[0]['category_name']);?></span>
                                     <h2><a href="article_details.php?id=<?php echo htmlentities($data[0]['id'])?>"><?php echo htmlentities($data[0]['title']);?></a></h2>

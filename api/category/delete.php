@@ -18,10 +18,13 @@ $db = $database->getConnection();
 $category = new Category($db);
   
 // get category id
-$data = json_decode(file_get_contents("php://input"));
+// $data = json_decode(file_get_contents("php://input"));
   
 // set category id to be deleted
-$category->id = $data->id;
+// $category->id = $data->id;
+
+// Get Cate ID
+$category->id = isset($_GET['id']) ? $_GET['id'] : die();
   
 // delete the category
 if($category->delete()){

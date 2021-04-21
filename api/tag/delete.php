@@ -18,10 +18,13 @@ $db = $database->getConnection();
 $tag = new Tag($db);
   
 // get tag id
-$data = json_decode(file_get_contents("php://input"));
+// $data = json_decode(file_get_contents("php://input"));
   
 // set tag id to be deleted
-$tag->id = $data->id;
+// $tag->id = $data->id;
+
+// Get Tag ID
+$tag->id = isset($_GET['id']) ? $_GET['id'] : die();
   
 // delete the tag
 if($tag->delete()){

@@ -16,12 +16,9 @@ $db = $database->connect();
   
 // prepare article object
 $article = new Article($db);
-  
-// get article id
-$data = json_decode(file_get_contents("php://input"));
-  
-// set article id to be deleted
-$article->id = $data->id;
+
+// Get Article ID
+$article->id = isset($_GET['id']) ? $_GET['id'] : die();
   
 // delete the article
 if($article->delete()){

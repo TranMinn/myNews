@@ -51,14 +51,18 @@ http://localhost:8088/myNews/api/article/update.php
     "id": "7"
 }
 
-http://localhost:8088/myNews/api/article/delete.php
+// FIX delete.php
 
--> delete
--> Header: ...
--> Body: Raw
-{
-    id: "7"
-}
+From:
+// $data = json_decode(file_get_contents("php://input"));
+// $article->id = $data->id;
+
+To:
+// Get Article ID
+$article->id = isset($_GET['id']) ? $_GET['id'] : die();
+
+(Delete by ID directly)
+http://localhost:8088/myNews/api/article/delete.php?id=46
 
 ==================================================
 

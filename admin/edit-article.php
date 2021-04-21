@@ -11,6 +11,62 @@ if(strlen($_SESSION['login'])==0)
 }
 else{
 
+    if(isset($_POST['update'])){
+        
+        $id = intval($_GET['id']);
+        $title = $_POST['title'];
+        $intro = $_POST['intro'];
+        $author = $_POST['author'];
+        $content = $_POST['content'];
+        $cat = $_POST['category'];
+        $tag = $_POST['tag'];
+    
+        // Get submitted image file
+        if(isset($_FILES['image'])){
+            $image = $_FILES['image']['name'];
+        }
+
+        // The path to store uploaded image
+        $target = "../articleImages/".basename($_FILES['image']['name']);
+
+        $form_data = array(
+            'title' => $title,
+            'intro' => $intro,
+            'author' => $author,
+            'content' => $content,
+            'cate_id' => $cat,
+            'tag_id' => $tag,
+            'image' => $image,
+            'id' => $id
+        );
+
+        $api_url = "http://localhost:8088/myNews/api/article/update.php";
+
+        $client = curl_init($api_url);
+        curl_setopt($client, CURLOPT_URL, $api_url);
+        curl_setopt($client, CURLOPT_POST, true);
+        curl_setopt($client, CURLOPT_POSTFIELDS, json_encode($form_data));
+        curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($client);
+
+    if($e = curl_error($client)){
+        $error = "Update failed!!!";
+    }else{
+        $response = json_decode($response, true);
+        
+        // Move uploaded image to folder articleImages
+        if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){
+            $msg = "Update successfully";
+            // echo "<script type='text/javascript'> window.location.href = 'manage-articles.php'; </script>";
+        }else{
+            $error = "Update failed";
+        }
+    }
+
+    curl_close($client);
+
+} 
+
 ?>
 
 <!DOCTYPE html>
@@ -96,70 +152,127 @@ else{
 <div class="col-sm-6">  
 <!---Success Message--->  
 <?php if($msg){ ?>
-    <div class="alert alert-success" role="alert">
-    <strong>Well done!</strong> <?php echo htmlentities($msg);?>
-    </div>
-    <?php } ?>
+<div class="alert alert-success" role="alert">
+<strong>Well done!</strong> <?php echo htmlentities($msg);?>
+</div>
+<?php } ?>
 
-    <!---Error Message--->
-    <?php if($error){ ?>
-    <div class="alert alert-danger" role="alert">
-    <strong>Oh snap!</strong> <?php echo htmlentities($error);?></div>
+<!---Error Message--->
+<?php if($error){ ?>
+<div class="alert alert-danger" role="alert">
+<strong>Oh snap!</strong> <?php echo htmlentities($error);?></div>
 <?php } ?>
 
 
 </div>
 </div>
 
+    <!-- Get info of the article -->
+    <?php
+
+    // Get ID of the article
+    $id = intval($_GET['id']);
+
+    // Resource Address
+    $url = "http://localhost:8088/myNews/api/article/read_one.php?id=$id";
+
+    $data = consume($url);
+    
+    print_r($data);
+
+    ?>
+
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="p-6">
                                     <div class="">
-                                        <form name="addpost" method="post">
+                                        <form action = "edit-article.php" method="POST" enctype="multipart/form-data">
+
+                                        
         <div class="form-group m-b-20">
             <label for="exampleInputEmail1">Title</label>
-            <input type="text" class="form-control" id="title" value="<?php echo htmlentities($row['title']);?>" name="posttitle" placeholder="Enter title" required>
+            <input type="text" class="form-control" id="title" value="<?php echo htmlentities($data['title']);?>" name="title" placeholder="Enter title" required>
         </div>
 
 
 
         <div class="form-group m-b-20">
             <label for="exampleInputEmail1">Category</label>
-                <select class="form-control" name="category" id="category" onChange="getSubCat(this.value);" required>
-                <option value="<?php echo htmlentities($row['catid']);?>"><?php echo htmlentities($row['category']);?></option>
+            <select class="form-control" name="category" id="category" required>
+            <option value="<?php echo htmlentities($data['cate_id']);?>"><?php echo htmlentities($data['category_name']);?></option>
 
-                <option value="<?php echo htmlentities($result['id']);?>"><?php echo htmlentities($result['CategoryName']);?></option>
+            <!-- Category options -->
+                <?php 
+                
+                $url_cat = "http://localhost:8088/myNews/api/category/read.php";
+                
+            
+                $cate = consume($url_cat);
+                
+                for($i = 0; $i < count($cate); $i++){ ?>
 
-            </select> 
+                    <option value="<?php echo htmlentities($cate[$i]['id']);?>"><?php echo htmlentities($cate[$i]['name']);?></option>
+
+                <?php } ?>
+
+            </select>  
         </div>
             
         <div class="form-group m-b-20">
             <label for="exampleInputEmail1">Tag</label>
-                <select class="form-control" name="subcategory" id="subcategory" required>
-                <option value="<?php echo htmlentities($row['subcatid']);?>"><?php echo htmlentities($row['tag']);?></option>
-            </select> 
+                <select class="form-control" name="tag" id="tag" required>
+                <option value="<?php echo htmlentities($data['tag_id']);?>"><?php echo htmlentities($data['tag_name']);?></option>
+                    <!-- Tag options -->
+                    <?php 
+
+                    $url_tag = "http://localhost:8088/myNews/api/tag/read.php";
+                    $tag = consume($url_tag);
+                    
+                    for($i = 0; $i < count($tag); $i++){ ?>
+
+                    <option value="<?php echo htmlentities($tag[$i]['id']);?>"><?php echo htmlentities($tag[$i]['name']);?></option>
+                
+                    <?php } ?>
+
+                </select>  
+        </div>
+
+        <div class="form-group m-b-20">
+            <label for="exampleInputEmail1">Author</label>
+            <input type="text" class="form-control" id="author" value="<?php echo htmlentities($data['author']);?>" name="author" placeholder="Enter author" required>
         </div>
                 
+        <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-box">
+                        <h4 class="m-b-30 m-t-0 header-title"><b>Introduction</b></h4>
+                        <textarea class="summernote" name="intro" required><?php echo htmlentities($data['intro']);?></textarea>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card-box">
-                        <h4 class="m-b-30 m-t-0 header-title"><b>Article Details</b></h4>
-                        <textarea class="summernote" name="description" required><?php echo htmlentities($row['']);?></textarea>
+                        <h4 class="m-b-30 m-t-0 header-title"><b>Article Content</b></h4>
+                        <textarea class="summernote" name="content" required><?php echo htmlentities($data['content']);?></textarea>
                     </div>
                 </div>
-        </div>
+            </div>
 
         <div class="row">
             <div class="col-sm-12">
                 <div class="card-box">
                     <h4 class="m-b-30 m-t-0 header-title"><b>Image</b></h4>
-                    <img src="postimages/<?php echo htmlentities($row['image']);?>" width="300"/>
+                    <img src="../articleImages/<?php echo htmlentities($data['image']);?>" width="300"/>
                     <br />
-                    <a href="change-image.php?id=<?php echo htmlentities($row['id']);?>">Update Image</a>
+                    <p>Update Image</p>
+                    <input type="file" class="form-control" id="image" name="image">
                 </div>
             </div>
         </div>
+
+
 
 
 <button type="submit" name="update" class="btn btn-success waves-effect waves-light">Update </button>
