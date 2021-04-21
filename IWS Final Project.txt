@@ -84,3 +84,18 @@ DATABASE:
 2. Each categories/tag: 5 articles (or more)
 
 ==================================================
+
+New TO_DO: Admin
+1. add-category.php
+2. add-tag.php
+3. manage-comments: delete (only)
+
+==================================================
+
+Instruction:
+
+- Open website by using localhost link: EX - http://localhost:8088/myNews/index.php -> to News portal
+                                           - http://localhost:8088/myNews/admin/index.php -> to Admin Dashboard
+                                        ->   Admin login: admin / 123456
+
+- Frontend -> Article CRD example (same)

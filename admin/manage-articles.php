@@ -11,6 +11,7 @@ if(strlen($_SESSION['login'])==0)
 }
 else{
 
+    // Delete article
     if($_GET['action']='del'){
 
         // Get ID of the article
@@ -20,27 +21,6 @@ else{
 
         $data = consume($url);
 
-        // // Send request to resource
-        // $client = curl_init($url);
-
-        // // Set options
-        // curl_setopt($client, CURLOPT_URL, $url);
-        // curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-
-        // // get response 
-        // $response = curl_exec($client);
-        // curl_close($client);
-
-        // $response = json_decode($response, true);
-
-        // if(isset($response['status'])){
-        //     if($response['status'] == '200'){                            
-        //         // $data = $response['data'];
-        //         $msg="Post deleted ";
-        //     }else{
-        //         $error="Something went wrong . Please try again.";  
-        //     }
-        // }
     }
 
 
