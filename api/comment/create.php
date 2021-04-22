@@ -23,7 +23,7 @@ $data = json_decode(file_get_contents("php://input"));
 if(
     !empty($data->article_id) &&
     !empty($data->username) &&
-    !empty($data->content) &&
+    !empty($data->content)
     
 ){
     $comment->article_id = $data->article_id;

@@ -64,8 +64,41 @@ class Comment{
         $this->username = $row['username'];
         $this->article_id = $row['article_id'];
         $this->title = $row['title'];
+        $this->date_created = $row['date_created'];
 
     }
+
+    // GET COMMENT BY ARTICLE ID
+    public function read_article_cmt($article_id){
+      // Query
+      $query = 'SELECT id, article_id, username, content, date_created
+                FROM ' . $this->table . '
+                WHERE
+                article_id = ?
+                ORDER BY date_created
+                DESC';
+
+      // Prepared Statement
+      $stmt = $this->conn->prepare($query);
+
+      // Bind ID
+      $stmt->bindParam(1, $article_id);
+
+      // Execute Query
+      $stmt->execute();
+
+      return $stmt;
+
+      // $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      // Set Properties
+      // $this->id = $row['id'];
+      // $this->content = $row['content'];
+      // $this->username = $row['username'];
+      // $this->article_id = $row['article_id'];
+      // $this->date_created = $row['date_created'];
+    }
+
 
         
     // CREATE COMMENT

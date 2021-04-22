@@ -57,7 +57,9 @@ else{
         // Move uploaded image to folder articleImages
         if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){
             $msg = "Update successfully";
-            // echo "<script type='text/javascript'> window.location.href = 'manage-articles.php'; </script>";
+
+            // Move to manage-articles page
+            echo "<script type='text/javascript'> window.location.href = 'manage-articles.php'; </script>";
         }else{
             $error = "Update failed";
         }
@@ -178,7 +180,7 @@ else{
 
     $data = consume($url);
     
-    print_r($data);
+    // print_r($data);
 
     ?>
 
@@ -186,7 +188,7 @@ else{
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="p-6">
                                     <div class="">
-                                        <form action = "edit-article.php" method="POST" enctype="multipart/form-data">
+                                        <form action = "edit-article.php?id=<?php echo htmlentities($id)?>" method="POST" enctype="multipart/form-data">
 
                                         
         <div class="form-group m-b-20">

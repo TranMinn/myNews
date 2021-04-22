@@ -21,14 +21,14 @@
                 $data = $response['data'];
                 return $data;
             }else{
-                echo $response['data'];
+                return $response['data'];
             }
 
         }else{
             echo "API failed!";
         }
 
-        return $data;
+        // return $data;
     }
 
 

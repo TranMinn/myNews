@@ -10,7 +10,7 @@ Category: id, name, date_created
 
 Tag: id, name, date_created
 
-Comment: id, username, content
+Comment: id, article_id, username, content, date_created
 
 // Test API
 
@@ -99,3 +99,11 @@ Instruction:
                                         ->   Admin login: admin / 123456
 
 - Frontend -> Article CRD example (same)
+
+==================================================
+
+- User post comments
+
+- Related articles
+
+==================================================

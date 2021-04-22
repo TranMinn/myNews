@@ -26,6 +26,7 @@
         'username' => $comment->username,
         'content' => $comment->content,
         'title' => $comment->title,
+        'date_created' => $comment->date_created
       );
 
     // JSON

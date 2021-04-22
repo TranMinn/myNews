@@ -1,3 +1,49 @@
+<?php
+                            
+include 'consume.php';
+
+    // Get ID of the article
+    $id = intval($_GET['id']);
+    // Resource Address
+    $url = "http://localhost:8088/myNews/api/article/read_one.php?id=$id";
+
+    $data = consume($url);
+
+    $url_cmt = "http://localhost:8088/myNews/api/comment/read_article_cmt.php?a_id=$id";
+
+    // Comment info of the article
+    $comment = consume($url_cmt);
+
+    // Post comment
+    if(isset($_POST['submit'])){
+        $username = $_POST['username'];
+        $content = $_POST['content'];
+        $article_id = intval($_GET['id']);
+
+        $form_data = array(
+            'username' => $username,
+            'content' => $content,
+            'article_id' => $article_id
+        );
+
+        $api_url = "http://localhost:8088/myNews/api/comment/create.php";
+
+        $client = curl_init($api_url);
+        curl_setopt($client, CURLOPT_URL, $api_url);
+        curl_setopt($client, CURLOPT_POST, true);
+        curl_setopt($client, CURLOPT_POSTFIELDS, json_encode($form_data));
+        curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($client);
+
+        curl_close($client);
+
+            $response = json_decode($response, true);
+            echo "<script type='text/javascript'> window.location.href = 'article_details.php?id=$id'; </script>";
+
+    }
+                          
+?>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
     <head>
@@ -29,6 +75,18 @@
             <link rel="stylesheet" href="assets/css/responsive.css">
    </head>
 
+   <style>
+   .prev-comments .single-item {
+    background: #FFF;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    padding: 10px 20px;
+    text-align: left;
+    margin-bottom: 25px;
+
+}
+   
+   </style>
+
    <body>
        
     <!-- Preloader Start -->
@@ -56,18 +114,7 @@
                    <div class="row">
                         <div class="col-lg-8">
                             
-                            <?php
-                            
-                            include 'consume.php';
-
-                            // Get ID of the article
-                            $id = intval($_GET['id']);
-                            // Resource Address
-                            $url = "http://localhost:8088/myNews/api/article/read_one.php?id=$id";
-
-                            $data = consume($url);
-                            
-                            ?>
+                           
 
                             <!-- Trending Tittle -->
                             <div class="about-right mb-90">
@@ -98,38 +145,59 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- From -->
+
+                            <!-- Comment section -->
+                            <!-- Form -->
                             <div class="row">
                                 <div class="col-lg-8">
-                                    <form class="form-contact contact_form mb-80" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                                    <form class="form-contact contact_form mb-80" action="article_details.php?id=<?php echo htmlentities($data['id'])?>" method="POST">
                                         <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <textarea class="form-control w-100 error" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder="Enter Message"></textarea>
-                                                </div>
-                                            </div>
+
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <input class="form-control error" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Enter your name">
+                                                    <h5>Name</h5>
+                                                    <input class="form-control error" name="username" id="username" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Enter your name">
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input class="form-control error" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
-                                                </div>
-                                            </div>
+
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <input class="form-control error" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder="Enter Subject">
+                                                    <h5>Comment</h5>
+                                                    <textarea class="form-control w-100 error" name="content" id="content" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your Comment'" placeholder="Enter your Comment"></textarea>
                                                 </div>
                                             </div>
+                                            
                                         </div>
+
                                         <div class="form-group mt-3">
-                                            <button type="submit" class="button button-contactForm boxed-btn">Send</button>
+                                            <button type="submit" name = "submit" class="button button-contactForm boxed-btn">Comment</button>
                                         </div>
+
                                     </form>
+
+                                    <!-- Display Comments -->
+                                    <div class = "prev-comments">
+
+                                    <?php
+                                    if (is_array($comment) || is_object($comment)){
+                                        foreach($comment as $c){
+                                        ?>
+                                            <div class = "single-item">
+                                                    <h6><?php echo htmlentities($c['username']);?></h6>
+                                                    <small><?php echo htmlentities($c['date_created']);?></small>
+                                                    <p><?php echo htmlentities($c['content']);?></p>
+                                            </div>
+
+                                        <?php }
+                                        }
+                                        ?>
+
+                                    </div>
+
                                 </div>
-                            </div>
+                        </div>
+
+
                         </div>
                         <div class="col-lg-4">
                             <!-- Section Tittle -->
