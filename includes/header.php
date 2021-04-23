@@ -53,18 +53,28 @@
                                         <nav>                  
                                             <ul id="navigation">    
                                                 <li><a href="index.php">Home</a></li>
-                                                <li><a href="categori.html">Category</a></li>
-                                                <li><a href="about.php">About</a></li>
-                                                <li><a href="latest_news.html">Latest News</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="#">Pages</a>
+                                                <li><a href="#">Categories</a>
                                                     <ul class="submenu">
-                                                        <li><a href="elements.html">Element</a></li>
-                                                        <li><a href="blog.html">Blog</a></li>
-                                                        <li><a href="single-blog.html">Blog Details</a></li>
-                                                        <li><a href="details.html">Categori Details</a></li>
+                                                        <li><a href="category.php?id=1">Sports</a></li>
+                                                        <li><a href="category.php?id=2">Business</a></li>
+                                                        <li><a href="category.php?id=4">Entertainment</a></li>
+                                                        <li><a href="category.php?id=6">Politics</a></li>
+                                                        <li><a href="category.php?id=3">Travel</a></li>
                                                     </ul>
                                                 </li>
+                                                <li><a href="#">Tags</a>
+                                                    <ul class="submenu">
+                                                        <li><a href="tag.php?id=1">Breaking</a></li>
+                                                        <li><a href="tag.php?id=2">Stay</a></li>
+                                                        <li><a href="tag.php?id=3">Celebrity</a></li>
+                                                        <li><a href="tag.php?id=5">Beauty</a></li>
+                                                        <li><a href="tag.php?id=4">Arts</a></li>
+                                                        <li><a href="tag.php?id=6">Fashion</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="about.php">About</a></li>
+                                                <li><a href="contact.php">Contact</a></li>
+                                                
                                             </ul>
                                         </nav>
                                     </div>

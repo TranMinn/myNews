@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>News Searched</title>
+        <title>Category</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -51,10 +51,10 @@
             <?php
                     include 'consume.php';
                 
-                    $s = $_POST['s'];
+                    $id = intval($_GET['id']);
 
                     // Resource Address
-                    $url = "http://localhost:8088/myNews/api/article/search.php?s=$s";
+                    $url = "http://localhost:8088/myNews/api/article/get_by_cat.php?c_id=$id";
 
                     $data = consume($url);
 

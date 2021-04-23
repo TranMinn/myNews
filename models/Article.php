@@ -113,7 +113,88 @@ class Article{
 
     }
 
-    // CREATE ARTICLE
+    // GET ARTICLES BY CATEGORY
+    public function get_by_cat($cate_id){
+      // Query
+      $query = 'SELECT c.name as category_name, t.name as tag_name, a.id, a.cate_id, a.tag_id, a.title, a.intro, a.image, a.content, a.author, a.date_created
+                FROM ' . $this->table . ' a
+                LEFT JOIN
+                  category c ON a.cate_id = c.id
+                LEFT JOIN
+                  tag t ON a.tag_id = t.id
+                WHERE
+                cate_id = ?
+                ORDER BY date_created
+                DESC';
+
+      // Prepared Statement
+      $stmt = $this->conn->prepare($query);
+
+      // Bind ID
+      $stmt->bindParam(1, $cate_id);
+
+      // Execute Query
+      $stmt->execute();
+
+      return $stmt;
+    }
+
+    // GET ARTICLE BY TAG
+    public function get_by_tag($tag_id){
+      // Query
+      $query = 'SELECT c.name as category_name, t.name as tag_name, a.id, a.cate_id, a.tag_id, a.title, a.intro, a.image, a.content, a.author, a.date_created
+                FROM ' . $this->table . ' a
+                LEFT JOIN
+                  category c ON a.cate_id = c.id
+                LEFT JOIN
+                  tag t ON a.tag_id = t.id
+                WHERE
+                tag_id = ?
+                ORDER BY date_created
+                DESC';
+
+      // Prepared Statement
+      $stmt = $this->conn->prepare($query);
+
+      // Bind ID
+      $stmt->bindParam(1, $tag_id);
+
+      // Execute Query
+      $stmt->execute();
+
+      return $stmt;
+    }
+
+    // GET RELATED ARTICLES
+    public function get_related($cate_id, $id){
+      // Query
+      $query = 'SELECT c.name as category_name, t.name as tag_name, a.id, a.cate_id, a.tag_id, a.title, a.intro, a.image, a.content, a.author, a.date_created
+                FROM ' . $this->table . ' a
+                LEFT JOIN
+                  category c ON a.cate_id = c.id
+                LEFT JOIN
+                  tag t ON a.tag_id = t.id
+                WHERE
+                a.cate_id = ? 
+                AND
+                a.id != ?
+                ORDER BY date_created
+                DESC';
+
+      // Prepared Statement
+      $stmt = $this->conn->prepare($query);
+
+      // Bind ID
+      $stmt->bindParam(1, $cate_id);
+      $stmt->bindParam(2, $id);
+
+      // Execute Query
+      $stmt->execute();
+
+      return $stmt;
+    }
+
+  // CREATE ARTICLE
   public function create() {
     //create query
     $query = 'INSERT INTO ' . $this->table . '

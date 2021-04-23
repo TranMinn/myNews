@@ -64,6 +64,18 @@ $article->id = isset($_GET['id']) ? $_GET['id'] : die();
 (Delete by ID directly)
 http://localhost:8088/myNews/api/article/delete.php?id=46
 
+// Get related:
+
+http://localhost:8088/myNews/api/article/get_related.php?c_id=2&&a_id=1
+
+// Get by category:
+
+http://localhost:8088/myNews/api/article/get_by_cat.php?c_id=2
+
+// Get by tag:
+http://localhost:8088/myNews/api/article/get_by_tag.php?t_id=2
+
+
 ==================================================
 
 Pages:

@@ -9,6 +9,13 @@ include 'consume.php';
 
     $data = consume($url);
 
+    // Get Related Articles
+    $c_id = $data['cate_id'];
+
+    $url_related = "http://localhost:8088/myNews/api/article/get_related.php?c_id=$c_id&&a_id=$id";
+    $related = consume($url_related);
+
+    // Get articles comments
     $url_cmt = "http://localhost:8088/myNews/api/comment/read_article_cmt.php?a_id=$id";
 
     // Comment info of the article
@@ -112,11 +119,10 @@ include 'consume.php';
         <div class="about-area">
             <div class="container">
                    <div class="row">
-                        <div class="col-lg-8">
-                            
-                           
+                        <div class="col-lg-8">                         
 
                             <!-- Trending Tittle -->
+
                             <div class="about-right mb-90">
                                 <div class="about-img">
                                     <img src="articleImages/<?php echo htmlentities($data['image']);?>" alt="">
@@ -177,11 +183,13 @@ include 'consume.php';
 
                                     <!-- Display Comments -->
                                     <div class = "prev-comments">
+                                    <h5>Comments(<?php echo htmlentities(count($comment));?>)</h5>
 
                                     <?php
                                     if (is_array($comment) || is_object($comment)){
                                         foreach($comment as $c){
                                         ?>
+
                                             <div class = "single-item">
                                                     <h6><?php echo htmlentities($c['username']);?></h6>
                                                     <small><?php echo htmlentities($c['date_created']);?></small>
@@ -199,6 +207,7 @@ include 'consume.php';
 
 
                         </div>
+    
                         <div class="col-lg-4">
                             <!-- Section Tittle -->
                             <div class="section-tittle mb-40">
@@ -245,10 +254,32 @@ include 'consume.php';
                                     </div>
                                 </div>
                             </div>
-                            <!-- New Poster -->
-                            <div class="news-poster d-none d-lg-block">
-                                <img src="assets/img/news/news_card.jpg" alt="">
+
+                            <!-- Related Articles -->
+
+                            <div class="section-tittle mb-40">
+                                <h3>Related Articles</h3>
                             </div>
+                        <div class="trending-main">
+                            
+                                <?php
+                                      
+                                for($i = 0; $i < 4; $i++){ ?>
+
+                                <div class="trand-right-single d-flex">
+                                    <div class="trand-right-img">
+                                        <img src="articleImages/<?php echo htmlentities($related[$i]['image']);?>" width="200px" height="150px">
+                                    </div>
+                                    <div class="trand-right-cap">
+                                        <span class="color1"><?php echo htmlentities($related[$i]['category_name'])?></span>
+                                        <h6><a href="article_details.php?id=<?php echo htmlentities($related[$i]['id'])?>"><?php echo htmlentities($related[$i]['title']);?></a></h6>
+                                    </div>
+                                </div>
+
+                                <?php } ?>
+                            
+                        </div>
+                            
                         </div>
                    </div>
             </div>

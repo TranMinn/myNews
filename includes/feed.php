@@ -71,19 +71,19 @@ $data = consume($url);
                     <!-- Right content -->
                     <div class="col-lg-4">
 
-                    <?php for($i = 4; $i < 9; $i++){ ?>
+                        <?php for($i = 4; $i < 9; $i++){ ?>
 
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="articleImages/<?php echo htmlentities($data[$i]['image']);?>" width="100px" height="100px">
+                            <div class="trand-right-single d-flex">
+                                <div class="trand-right-img">
+                                    <img src="articleImages/<?php echo htmlentities($data[$i]['image']);?>" width="200px" height="150px">
+                                </div>
+                                <div class="trand-right-cap">
+                                    <span class="color1"><?php echo htmlentities($data[$i]['tag_name']);?></span>
+                                    <h6><a href="article_details.php?id=<?php echo htmlentities($data[$i]['id'])?>"><?php echo htmlentities($data[$i]['title']);?></a></h6>
+                                </div>
                             </div>
-                            <div class="trand-right-cap">
-                                <span class="color1"><?php echo htmlentities($data[$i]['tag_name']);?></span>
-                                <h4><a href="article_details.php?id=<?php echo htmlentities($data[$i]['id'])?>"><?php echo htmlentities($data[$i]['title']);?></a></h4>
-                            </div>
-                        </div>
 
-                    <?php } ?>
+                        <?php } ?>
                     </div>
 
                 </div>
@@ -147,12 +147,11 @@ $data = consume($url);
                             <!--Nav Button  -->                                            
                             <nav>                                                                     
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
-                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Lifestyle</a>
-                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Travel</a>
-                                    <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">Fashion</a>
-                                    <a class="nav-item nav-link" id="nav-Sports" data-toggle="tab" href="#nav-nav-Sport" role="tab" aria-controls="nav-contact" aria-selected="false">Sports</a>
-                                    <a class="nav-item nav-link" id="nav-technology" data-toggle="tab" href="#nav-techno" role="tab" aria-controls="nav-contact" aria-selected="false">Technology</a>
+                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Entertainment</a>
+                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Business</a>
+                                    <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">Sports</a>
+                                    <a class="nav-item nav-link" id="nav-Sports" data-toggle="tab" href="#nav-nav-Sport" role="tab" aria-controls="nav-contact" aria-selected="false">Politics</a>
+                                    <a class="nav-item nav-link" id="nav-technology" data-toggle="tab" href="#nav-techno" role="tab" aria-controls="nav-contact" aria-selected="false">Style</a>
                                 </div>
                             </nav>
                             <!--End Nav Button  -->
@@ -167,203 +166,83 @@ $data = consume($url);
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">           
                                 <div class="whats-news-caption">
                                     <div class="row">
+
+                                    <?php
+                                    $urle = "http://localhost:8088/myNews/api/article/get_by_cat.php?c_id=4";
+                                    $en = consume($urle);
+
+                                    for($i = 0; $i < 4; $i++){?>
+
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="assets/img/news/whatNews1.jpg" alt="">
+                                                    <img src="articleImages/<?php echo htmlentities($en[$i]['image']);?>" width = "250px" height = "250px">
                                                 </div>
                                                 <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+                                                    <span class="color1"><?php echo htmlentities($en[$i]['category_name']);?></span>
+                                                    <h4><a href="article_details.php?id=<?php echo htmlentities($en[$i]['id'])?>"><?php echo htmlentities($en[$i]['title']);?></a></h4>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews2.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews3.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews4.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                        <?php }?>
+
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Card two -->
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <div class="whats-news-caption">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews1.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews2.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews3.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews4.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card three -->
                             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                                 <div class="whats-news-caption">
                                     <div class="row">
+
+                                    <?php
+                                    $urlb = "http://localhost:8088/myNews/api/article/get_by_cat.php?c_id=2";
+                                    $b = consume($urlb);
+
+                                    for($i = 0; $i < 4; $i++){?>
+
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="assets/img/news/whatNews1.jpg" alt="">
+                                                    <img src="articleImages/<?php echo htmlentities($b[$i]['image']);?>" width = "250px" height = "250px">
                                                 </div>
                                                 <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+                                                    <span class="color1"><?php echo htmlentities($b[$i]['category_name']);?></span>
+                                                    <h4><a href="article_details.php?id=<?php echo htmlentities($b[$i]['id'])?>"><?php echo htmlentities($b[$i]['title']);?></a></h4>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews2.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews3.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews4.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                        <?php }?>
+  
                                     </div>
                                 </div>
                             </div>
-                            <!-- card fure -->
+                            <!-- card Three -->
                             <div class="tab-pane fade" id="nav-last" role="tabpanel" aria-labelledby="nav-last-tab">
                                 <div class="whats-news-caption">
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews1.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews2.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+
+                                        <?php
+                                        $urlsp = "http://localhost:8088/myNews/api/article/get_by_cat.php?c_id=1";
+                                        $sp = consume($urlsp);
+
+                                        for($i = 0; $i < 4; $i++){?>
+
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="single-what-news mb-100">
+                                                    <div class="what-img">
+                                                        <img src="articleImages/<?php echo htmlentities($sp[$i]['image']);?>" width = "250px" height = "250px">
+                                                    </div>
+                                                    <div class="what-cap">
+                                                        <span class="color1"><?php echo htmlentities($sp[$i]['category_name']);?></span>
+                                                        <h4><a href="article_details.php?id=<?php echo htmlentities($sp[$i]['id'])?>"><?php echo htmlentities($sp[$i]['title']);?></a></h4>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div> 
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews3.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews4.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                            <?php }?>
                                     </div>
                                 </div>
                             </div>
@@ -371,50 +250,26 @@ $data = consume($url);
                             <div class="tab-pane fade" id="nav-nav-Sport" role="tabpanel" aria-labelledby="nav-Sports">
                                 <div class="whats-news-caption">
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews1.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews2.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+
+                                        <?php
+                                        $urlp = "http://localhost:8088/myNews/api/article/get_by_cat.php?c_id=6";
+                                        $p = consume($urlp);
+
+                                        for($i = 0; $i < 4; $i++){?>
+
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="single-what-news mb-100">
+                                                    <div class="what-img">
+                                                        <img src="articleImages/<?php echo htmlentities($p[$i]['image']);?>" width = "250px" height = "250px">
+                                                    </div>
+                                                    <div class="what-cap">
+                                                        <span class="color1"><?php echo htmlentities($p[$i]['category_name']);?></span>
+                                                        <h4><a href="article_details.php?id=<?php echo htmlentities($p[$i]['id'])?>"><?php echo htmlentities($p[$i]['title']);?></a></h4>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div> 
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews3.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews4.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                            <?php }?>
                                     </div>
                                 </div>
                             </div>
@@ -422,50 +277,26 @@ $data = consume($url);
                             <div class="tab-pane fade" id="nav-techno" role="tabpanel" aria-labelledby="nav-technology">
                                 <div class="whats-news-caption">
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews1.jpg" alt="">
+                                            
+                                        <?php
+                                            $urlst = "http://localhost:8088/myNews/api/article/get_by_cat.php?c_id=5";
+                                            $st = consume($urlst);
+
+                                            for($i = 0; $i < 4; $i++){?>
+
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="single-what-news mb-100">
+                                                        <div class="what-img">
+                                                            <img src="articleImages/<?php echo htmlentities($st[$i]['image']);?>" width = "250px" height = "250px">
+                                                        </div>
+                                                        <div class="what-cap">
+                                                            <span class="color1"><?php echo htmlentities($st[$i]['category_name']);?></span>
+                                                            <h4><a href="article_details.php?id=<?php echo htmlentities($st[$i]['id'])?>"><?php echo htmlentities($st[$i]['title']);?></a></h4>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews2.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews3.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews4.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                                <?php }?>
                                     </div>
                                 </div>
                             </div>
