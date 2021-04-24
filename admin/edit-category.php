@@ -15,9 +15,6 @@ else{
         
         $id = intval($_GET['id']);
         $name = $_POST['name'];
-       
-    
-
 
         $form_data = array(
             'name' => $name,
@@ -165,7 +162,7 @@ else{
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="p-6">
                                     <div class="">
-                                        <form action = "edit-category.php?id=<?php echo htmlentities($id)?>" method="POST" enctype="multipart/form-data">
+                                        <form action = "edit-category.php?id=<?php echo htmlentities($id)?>" method="POST">
 
                                         
         

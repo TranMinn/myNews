@@ -21,7 +21,7 @@ $category = new Category($db);
 $data = json_decode(file_get_contents("php://input"));
   
 // set ID property of category to be edited
-$tacategoryg->id = $data->id;
+$category->id = $data->id;
   
 // set category property values
 
