@@ -47,7 +47,7 @@
         <!-- Page Content -->
         <main>
 
-            <!-- Articles Area -->
+            <!-- Categories Area -->
             <?php
                     include 'consume.php';
                 

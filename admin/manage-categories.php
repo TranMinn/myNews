@@ -37,7 +37,7 @@ else{
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
         <!-- App title -->
-        <title>AZ News | Manage Articles</title>
+        <title>AZ News | Manage Categories</title>
 
         <!--Morris Chart CSS -->
 		<link rel="stylesheet" href="../plugins/morris/morris.css">
@@ -133,7 +133,7 @@ else{
                                                 <td><?php echo htmlentities($data[$i]['name']);?></td>
                                                 
 
-                                                <td><a href="edit-article.php?id=<?php echo htmlentities($data[$i]['id']);?>">
+                                                <td><a href="edit-category.php?id=<?php echo htmlentities($data[$i]['id']);?>">
                                                 <i class="fa fa-pencil" style="color: #29b6f6;"></i></a> 
                                                 &nbsp;<a href="manage-categories.php?id=<?php echo htmlentities($data[$i]['id']);?>&&action=del" onclick="return confirm('Do you really want to delete ?')"> 
                                                 <i class="fa fa-trash-o" style="color: #f05050;"></i></a> </td>

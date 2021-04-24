@@ -62,15 +62,15 @@ class Category{
     // CREATE CATE
     public function create() {
         //create query
-        $query = 'INSERT INTO' . $this->table . '
-          SET
-            name = :name';
+        $query = 'INSERT INTO ' . $this->table . '
+                 SET
+                name = :name';
     
         // Prepared Statement
         $stmt = $this->conn->prepare($query);
     
         //clean data
-        $this->title=htmlspecialchars(strip_tags($this->name));
+        $this->name=htmlspecialchars(strip_tags($this->name));
      
         //bind data
         $stmt->bindParam(":name", $this->name);
@@ -90,7 +90,7 @@ class Category{
   
         // update query
         $query = 'UPDATE
-                    ' . $this->table_name . '
+                    ' . $this->table . '
                 SET
                 name = :name
                 WHERE
@@ -122,7 +122,7 @@ class Category{
     public function delete(){
   
         // delete query
-        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+        $query = "DELETE FROM " . $this->table . " WHERE id = ?";
       
         // prepare query
         $stmt = $this->conn->prepare($query);
