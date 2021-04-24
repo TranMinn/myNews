@@ -61,17 +61,16 @@ class Tag{
     // CREATE TAG
     public function create() {
         //create query
-        $query = 'INSERT INTO' . $this->table . '
-          SET
-            name = :name,
-            ';
+        $query = 'INSERT INTO ' . $this->table . '
+                 SET
+                name = :name';
     
         // Prepared Statement
         $stmt = $this->conn->prepare($query);
     
         //clean data
         
-        $this->title=htmlspecialchars(strip_tags($this->name));
+        $this->name=htmlspecialchars(strip_tags($this->name));
         
      
         //bind data
@@ -130,7 +129,7 @@ class Tag{
     public function delete(){
   
         // delete query
-        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+        $query = "DELETE FROM " . $this->table . " WHERE id = ?";
       
         // prepare query
         $stmt = $this->conn->prepare($query);

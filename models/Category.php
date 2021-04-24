@@ -90,7 +90,7 @@ class Category{
   
         // update query
         $query = 'UPDATE
-                    ' . $this->table_name . '
+                    ' . $this->table . '
                 SET
                 name = :name
                 WHERE

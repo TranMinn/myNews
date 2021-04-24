@@ -12,7 +12,7 @@ include_once '../../models/Category.php';
   
 // get database connection
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->connect();
   
 // prepare category object
 $category = new Category($db);
