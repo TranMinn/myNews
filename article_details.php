@@ -266,11 +266,11 @@ include 'consume.php';
                                       
                                 for($i = 0; $i < 4; $i++){ ?>
 
-                                <div class="trand-right-single d-flex">
+                                <div class="trand-right-single d-flex" style="margin-bottom: 10px">
                                     <div class="trand-right-img">
                                         <img src="articleImages/<?php echo htmlentities($related[$i]['image']);?>" width="200px" height="150px">
                                     </div>
-                                    <div class="trand-right-cap">
+                                    <div class="trand-right-cap" style="padding-left:10px">
                                         <span class="color1"><?php echo htmlentities($related[$i]['category_name'])?></span>
                                         <h6><a href="article_details.php?id=<?php echo htmlentities($related[$i]['id'])?>"><?php echo htmlentities($related[$i]['title']);?></a></h6>
                                     </div>
