@@ -5,7 +5,7 @@ class Tag{
     private $conn;
     private $table = "tag";
 
-    // Category properties
+    // Tag properties
     public $id;
     public $name;
     public $date_created;
@@ -15,7 +15,7 @@ class Tag{
         $this->conn = $db;
     }
 
-    // GET TAGS
+    // GET Tags
     public function read(){
         // Query
         $query = 'SELECT id, name, date_created 
@@ -57,8 +57,9 @@ class Tag{
     }
 
         
+    // TO-DO:
         
-    // CREATE TAG
+    // CREATE Tag
     public function create() {
         //create query
         $query = 'INSERT INTO ' . $this->table . '
@@ -69,36 +70,29 @@ class Tag{
         $stmt = $this->conn->prepare($query);
     
         //clean data
-        
         $this->name=htmlspecialchars(strip_tags($this->name));
-        
      
         //bind data
-        
         $stmt->bindParam(":name", $this->name);
-        
      
          // execute query
-         if($stmt->execute()){
-          return true;
-         }
+        if($stmt->execute()){
+            return true;
+        }
           // error
           printf("Error: %s.\n", $stmt->error);
     
           return false;
       }
-    
 
-    // UPDATE TAG
+    // UPDATE Tag
     public function update(){
   
         // update query
         $query = 'UPDATE
-                    ' . $this->table_name . '
+                    ' . $this->table . '
                 SET
-                
-                name = :name,
-                
+                name = :name
                 WHERE
                     id = :id';
       
@@ -114,7 +108,7 @@ class Tag{
         
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":id", $this->id);
-
+        
        // execute query
        if($stmt->execute()){
         return true;
@@ -124,8 +118,7 @@ class Tag{
   
         return false;
     }
-
-    // DELETE TAG
+    // DELETE Tag
     public function delete(){
   
         // delete query
