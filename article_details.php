@@ -185,11 +185,13 @@ include 'consume.php';
                                     <div class = "prev-comments">
                                     
                                     <?php
-                                    if (is_array($comment) || is_object($comment)){
-                                        foreach($comment as $c){
+                                    if (is_array($comment) || is_object($comment)){?>
+
+                                        <h5>Comments(<?php echo htmlentities(count($comment));?>)</h5>
+
+                                        <?php foreach($comment as $c){
                                         ?>
 
-                                            <h5>Comments(<?php echo htmlentities(count($comment));?>)</h5>
                                             <div class = "single-item">
                                                     <h6><?php echo htmlentities($c['username']);?></h6>
                                                     <small><?php echo htmlentities($c['date_created']);?></small>
