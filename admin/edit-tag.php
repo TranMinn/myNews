@@ -15,9 +15,6 @@ else{
         
         $id = intval($_GET['id']);
         $name = $_POST['name'];
-       
-    
-
 
         $form_data = array(
             'name' => $name,
@@ -37,7 +34,7 @@ else{
         $error = "Update failed!!!";
     }else{
         $response = json_decode($response, true);
-        echo "<script type='text/javascript'> window.location.href = 'manage-categories.php'; </script>";
+        echo "<script type='text/javascript'> window.location.href = 'manage-tags.php'; </script>";
         
         }
     }
@@ -165,7 +162,7 @@ else{
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="p-6">
                                     <div class="">
-                                        <form action = "edit-tag.php?id=<?php echo htmlentities($id)?>" method="POST" enctype="multipart/form-data">
+                                        <form action = "edit-tag.php?id=<?php echo htmlentities($id)?>" method="POST">
 
                                         
         
@@ -173,7 +170,7 @@ else{
 
                                         <div class="form-group m-b-20">
             <label for="exampleInputEmail1">Name</label>
-            <input type="text" class="form-control" id="name" value="<?php echo htmlentities($data['name']);?>" name="name" placeholder="Enter Tag" required>
+            <input type="text" class="form-control" id="name" value="<?php echo htmlentities($data['name']);?>" name="name" placeholder="Enter tag" required>
         </div>
 
 

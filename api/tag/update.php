@@ -12,7 +12,7 @@ include_once '../../models/Tag.php';
   
 // get database connection
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->connect();
   
 // prepare tag object
 $tag = new Tag($db);

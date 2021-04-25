@@ -137,8 +137,7 @@ else{
                                                 <td><?php echo htmlentities($data[$i]['username']);?></td>
                                                 <td><?php echo htmlentities($data[$i]['content']);?></td>
                                                 
-                                                <td><a href="edit-comment.php?id=<?php echo htmlentities($data[$i]['id']);?>">
-                                                <i class="fa fa-pencil" style="color: #29b6f6;"></i></a> 
+                                                <td>
                                                 &nbsp;<a href="manage-comments.php?id=<?php echo htmlentities($data[$i]['id']);?>&&action=del" onclick="return confirm('Do you really want to delete ?')"> 
                                                 <i class="fa fa-trash-o" style="color: #f05050;"></i></a> </td>
                                             </tr>

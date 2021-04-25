@@ -12,21 +12,21 @@ include_once '../../models/Comment.php';
   
 // get database connection
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->connect();
   
-// prepare comment object
+// prepare cmt object
 $comment = new Comment($db);
   
-// get comment id
+// get cmt id
 // $data = json_decode(file_get_contents("php://input"));
   
-// set comment id to be deleted
-// $comment->id = $data->id;
+// set cmt id to be deleted
+// $cmt->id = $data->id;
 
-// Get Comment ID
+// Get cmt ID
 $comment->id = isset($_GET['id']) ? $_GET['id'] : die();
   
-// delete the comment
+// delete the cmt
 if($comment->delete()){
   
     // set response code - 200 ok
@@ -43,6 +43,6 @@ else{
     http_response_code(503);
   
     // tell the user
-    echo json_encode(array('status' => 503, 'data' => "Unable to delete comment."));
+    echo json_encode(array('status' => 503, 'data' => "Unable to delete comment!"));
 }
 ?>

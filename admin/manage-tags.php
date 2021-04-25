@@ -116,6 +116,7 @@ else{
 
                                                 <tr>                                      
                                                 <th>Name</th>
+                                                <th>Action</th>
                                                 </tr>
 
                                         </thead>
