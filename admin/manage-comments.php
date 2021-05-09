@@ -115,7 +115,7 @@ else{
                                             <thead>
 
                                                 <tr>                                      
-                                                <th>Article_Id</th>
+                                                <th>Article ID</th>
                                                 <th>Username</th>
                                                 <th>Content</th>
                                                 <th>Action</th>

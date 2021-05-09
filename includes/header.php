@@ -60,6 +60,7 @@
                                                         <li><a href="category.php?id=4">Entertainment</a></li>
                                                         <li><a href="category.php?id=6">Politics</a></li>
                                                         <li><a href="category.php?id=3">Travel</a></li>
+                                                        <li><a href="category.php?id=9">Health</a></li>
                                                     </ul>
                                                 </li>
                                                 <li><a href="#">Tags</a>
@@ -70,6 +71,7 @@
                                                         <li><a href="tag.php?id=5">Beauty</a></li>
                                                         <li><a href="tag.php?id=4">Arts</a></li>
                                                         <li><a href="tag.php?id=6">Fashion</a></li>
+                                                        <li><a href="tag.php?id=13">Medicine</a></li>
                                                     </ul>
                                                 </li>
                                                 <li><a href="about.php">About</a></li>

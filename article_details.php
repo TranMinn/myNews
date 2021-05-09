@@ -129,12 +129,29 @@ include 'consume.php';
                                 </div>
                                 <div class="section-tittle mb-30 pt-30">
                                     <h2><?php echo htmlentities($data['title']);?></h2>
+                                    <span class="genric-btn danger circle"><?php echo htmlentities($data['tag_name'])?></span>
+                                    <span class="genric-btn danger circle"><?php echo htmlentities($data['category_name'])?></span>
+                                    <br></br>
                                     <h5>By <?php echo htmlentities($data['author']);?></h5>
-                                    <h6>Updated <?php echo htmlentities($data['date_created']);?></h6>
+                                    
+                                    <span class="icon"><i class="fa fa-globe" aria-hidden="true"></i></span>
+                                    <span>Updated <?php echo htmlentities($data['date_created']);?></span>
+                                    
 
                                 </div>
                                 <div class="about-prea">
-                                    <p class="about-pera1 mb-25"><?php echo htmlentities($data['intro']);?></p>
+                                    
+
+                                    <div class="section-top-border">
+                                        <h3 class="mb-30">AZ News</h3>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <blockquote class="generic-blockquote">
+                                                    <?php echo htmlentities($data['intro']);?>
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </div>
                             
                                     <p class="about-pera1 mb-25"><?php echo htmlentities($data['content']);?></p>
                                 </div> 
@@ -264,21 +281,41 @@ include 'consume.php';
                             </div>
                         <div class="trending-main">
                             
-                                <?php
+                            <?php
+
+                            if (is_array($related) || is_object($related)){
+
+                                if(count($related) >= 4){
                                       
-                                for($i = 0; $i < 4; $i++){ ?>
+                                    for($i = 0; $i < 4; $i++){ ?>
 
-                                <div class="trand-right-single d-flex" style="margin-bottom: 10px">
-                                    <div class="trand-right-img">
-                                        <img src="articleImages/<?php echo htmlentities($related[$i]['image']);?>" width="200px" height="150px">
+                                    <div class="trand-right-single d-flex" style="margin-bottom: 10px">
+                                        <div class="trand-right-img">
+                                            <img src="articleImages/<?php echo htmlentities($related[$i]['image']);?>" width="200px" height="150px">
+                                        </div>
+                                        <div class="trand-right-cap" style="padding-left:10px">
+                                            <span class="genric-btn primary small"><?php echo htmlentities($related[$i]['category_name'])?></span>
+                                            <h6><a href="article_details.php?id=<?php echo htmlentities($related[$i]['id'])?>"><?php echo htmlentities($related[$i]['title']);?></a></h6>
+                                        </div>
                                     </div>
-                                    <div class="trand-right-cap" style="padding-left:10px">
-                                        <span class="color1"><?php echo htmlentities($related[$i]['category_name'])?></span>
-                                        <h6><a href="article_details.php?id=<?php echo htmlentities($related[$i]['id'])?>"><?php echo htmlentities($related[$i]['title']);?></a></h6>
-                                    </div>
-                                </div>
 
-                                <?php } ?>
+                                <?php }
+                                }else{
+                                    foreach($related as $r){ ?>
+
+                                        <div class="trand-right-single d-flex" style="margin-bottom: 10px">
+                                        <div class="trand-right-img">
+                                            <img src="articleImages/<?php echo htmlentities($r['image']);?>" width="200px" height="150px">
+                                        </div>
+                                        <div class="trand-right-cap" style="padding-left:10px">
+                                            <span class="genric-btn primary small"><?php echo htmlentities($r['category_name'])?></span>
+                                            <h6><a href="article_details.php?id=<?php echo htmlentities($r['id'])?>"><?php echo htmlentities($r['title']);?></a></h6>
+                                        </div>
+                                    </div>
+
+                                   <?php }
+                                }
+                            } ?>
                             
                         </div>
                             

@@ -69,8 +69,9 @@
                                     <div class="trending-top mb-30">
                                         <div class="trend-top-img">
                                             <img src="articleImages/<?php echo htmlentities($data[$i]['image']);?>" width = "700px" height = "450px">
+                                            <br></br>
                                             <div class="trend-top-cap">
-                                                <span class="color1"><?php echo htmlentities($data[$i]['category_name']);?></span>
+                                                <span class="genric-btn danger small"><?php echo htmlentities($data[$i]['category_name']);?></span>
                                                 <h2><a href="article_details.php?id=<?php echo htmlentities($data[$i]['id'])?>"><?php echo htmlentities($data[$i]['title']);?></a></h2>
                                             </div>
                                         </div>
