@@ -12,7 +12,7 @@ include_once '../../models/Comment.php';
   
 // get database connection
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->connect();
   
 // prepare comment object
 $comment = new Comment($db);
